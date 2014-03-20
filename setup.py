@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+
 from setuptools import setup
 
 install_requires = [
@@ -18,7 +20,7 @@ setup(
     py_modules=['poff'],
     install_requires=install_requires,
     extras_require={
-        'test': ['nose', 'coverage'],
+        'test': ['nose', 'coverage', 'tox'],
         'postgres': ['psycopg2'],
     },
     entry_points={
