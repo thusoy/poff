@@ -1,5 +1,6 @@
 from . import db
 
+import base64
 from flask import Markup
 from flask.ext.wtf import Form
 import os
@@ -41,6 +42,11 @@ class DynDNSClient(db.Model):
     def __init__(self, *args, **kwargs):
         self.key = os.urandom(64)
         super(DynDNSClient, self).__init__(*args, **kwargs)
+
+
+    @property
+    def b64_key(self):
+        return base64.b64encode(self.key)
 
 
 class _PrintableForm(model_form_factory(Form)):
