@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
+import sys
 
 install_requires = [
     'flask',
@@ -10,6 +11,9 @@ install_requires = [
     'wtforms-alchemy',
 ]
 
+if sys.version_info < (2, 7, 0):
+    install_requires.append('argparse')
+
 setup(
     name='poff',
     version='0.1.0',
@@ -17,7 +21,7 @@ setup(
     author_email='tarjei@roms.no',
     url='https://github.com/thusoy/poff',
     description="A quite small pdns frontend",
-    py_modules=['poff'],
+    packages=find_packages(),
     install_requires=install_requires,
     extras_require={
         'test': ['nose', 'coverage', 'tox'],
