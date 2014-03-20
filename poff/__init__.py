@@ -68,7 +68,7 @@ def serve():
     parser.add_argument('-d', '--debug',
         action='store_true',
         default=False,
-        help='Show debug inforamtion on errors',
+        help='Show debug inforamtion on errors. DO NOT RUN WITH THIS OPTION IN PRODUCTION!',
     )
     args = parser.parse_args()
     app = create_app(config_file=args.config_file)
