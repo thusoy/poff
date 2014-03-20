@@ -65,6 +65,11 @@ def serve():
         metavar='<config-file>',
         help='Config file to use. If none is given, will load from the envvar POFF_CONFIG_FILE.',
     )
+    parser.add_argument('-d', '--debug',
+        action='store_true',
+        default=False,
+        help='Show debug inforamtion on errors',
+    )
     args = parser.parse_args()
     app = create_app(config_file=args.config_file)
-    app.run(host=args.host, port=args.port)
+    app.run(host=args.host, port=args.port, debug=args.debug)
