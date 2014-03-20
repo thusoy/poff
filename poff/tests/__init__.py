@@ -17,7 +17,7 @@ class DBTestCase(unittest.TestCase):
             'SECRET_KEY = "testkey"',
 #            'TESTING = True',
             'WTF_CSRF_ENABLED = False',
-        ]))
+        ]).encode('utf-8'))
         self.config_file.close()
         self.app = create_app(self.config_file.name)
         with self.app.app_context():
