@@ -9,6 +9,10 @@ install: pip install -e .[test]
 
 script: nosetests --with-coverage --cover-package poff --cover-html --cover-branches
 
+after_success:
+    # Only deploy coverage from 2.7
+    - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then ./travis/deploy_coverage.sh --verbose; fi
+
 
 env:
   global:
