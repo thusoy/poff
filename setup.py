@@ -32,6 +32,11 @@ setup(
             'poff = poff:serve',
         ]
     },
+    package_data={
+        '': [
+            'templates/*.html',
+        ],
+    },
     classifiers=[
         # 'Development Status :: 1 - Planning',
         # 'Development Status :: 2 - Pre-Alpha',
