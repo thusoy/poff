@@ -30,7 +30,7 @@ class Record(db.Model):
     prio = db.Column(db.Integer)
     change_date = db.Column(db.Integer)
     disabled = db.Column(db.Boolean, default=False)
-    domain = db.relationship('Domain', backref=db.backref('records', lazy='dynamic'))
+    domain = db.relationship('Domain', backref=db.backref('records', lazy='dynamic', cascade='all,delete'))
 
 
 class DynDNSClient(db.Model):
