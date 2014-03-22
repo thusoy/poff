@@ -54,14 +54,14 @@
             </p>
         {% endfor %}
         <form action="/domains/{{ domain.id }}/new_record" method="post">
-          {{ recordform }}
+          {{ recordform.render() }}
           <input type="submit" value="New record">
         </form>
       {% endfor %}
 
       <h3>New domain</h3>
       <form action="/domains" method="post">
-        {{ domainform }}
+        {{ domainform.render() }}
         <input type="submit" value="New domain">
       </form>
 

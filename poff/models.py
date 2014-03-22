@@ -51,7 +51,7 @@ class DynDNSClient(db.Model):
 
 class _PrintableForm(model_form_factory(Form)):
 
-    def __str__(self):
+    def render(self):
         fields = []
         for f in self:
             if isinstance(f, HiddenField):
