@@ -51,18 +51,22 @@ class MethodOverrideView(MethodView):
         'OPTIONS'
     ])
 
+    # Make sure POST requests always are allowed to this view
     methods = ['POST']
 
     def dispatch_request(self, *args, **kwargs):
+        """ Find the target HTTP method and execute it. """
         meth = getattr(self, request.method.lower(), None)
-        # if the request method is HEAD and we don't have a handler for it
-        # retry with GET
+
+        # if the request method is HEAD and we don't have a handler for it retry with GET
         if meth is None and request.method == 'HEAD':
             meth = getattr(self, 'get', None)
 
-        method_overide = request.form.get('_method', '').upper()
-        if method_overide in MethodOverrideView.allowed_methods and hasattr(self, method_overide.lower()):
-            return getattr(self, method_overide.lower())(*args, **kwargs)
+        # If an override is desired, load that if we have it
+        method_override = request.form.get('_method', '').upper()
+        if method_override in MethodOverrideView.allowed_methods and hasattr(self, method_override.lower()):
+            meth = getattr(self, method_override.lower())
+
         assert meth is not None, 'Unimplemented method %r' % request.method
         return meth(*args, **kwargs)
 
