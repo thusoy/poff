@@ -32,7 +32,7 @@
 
       {% for domain in domains %}
         <h2>{{ domain.name }}</h2>
-        <form action="/domains/{{ domain.id }}" method="post">
+        <form action="{{ url_for('.domain_details', domain_id=domain.id) }}" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <input type="submit" value="Delete domain">
         </form>
