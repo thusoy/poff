@@ -8,6 +8,7 @@ install_requires = [
     'flask',
     'flask-sqlalchemy',
     'flask-wtf',
+    'pyyaml',
     'wtforms-alchemy',
 ]
 
@@ -29,7 +30,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'poff = poff:serve',
+            'poff = poff.cli:cli_entry',
         ]
     },
     package_data={
