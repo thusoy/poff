@@ -8,12 +8,9 @@ import unittest
 class DBTestCase(unittest.TestCase):
 
     def _set_up(self):
-        self.tmp_db = tempfile.NamedTemporaryFile(delete=False)
-        self.tmp_db.close()
         self.config_file = tempfile.NamedTemporaryFile(delete=False)
-        sqlite_db_name = self.tmp_db.name.replace('\\', '/')
         self.config_file.write('\n'.join([
-            'SQLALCHEMY_DATABASE_URI = "sqlite:///%s"' % sqlite_db_name,
+            'SQLALCHEMY_DATABASE_URI = "sqlite://"',
             'SECRET_KEY = "testkey"',
 #            'TESTING = True',
             'WTF_CSRF_ENABLED = False',
@@ -27,7 +24,6 @@ class DBTestCase(unittest.TestCase):
 
     def _tear_down(self):
         os.remove(self.config_file.name)
-        os.remove(self.tmp_db.name)
 
 
     def __call__(self, *args, **kwargs):
