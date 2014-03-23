@@ -27,8 +27,11 @@ class DynDNSTest(DBTestCase):
             'record': 'www.test.com',
             'key': self.client_key,
         }
+        headers = {
+            'X-Forwarded-For': '1.2.3.4',
+        }
         response = self.client.post('/update-record', data=data, follow_redirects=True,
-            environ_overrides={'REMOTE_ADDR':'1.2.3.4'}
+            environ_overrides={'REMOTE_ADDR':'127.0.0.1'}, headers=headers,
         )
         self.assert200(response)
 

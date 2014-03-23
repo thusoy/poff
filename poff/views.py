@@ -139,9 +139,10 @@ def update_record():
     auth_key_base64 = request.form.get('key', '')
     auth_key = base64.b64decode(auth_key_base64)
     if constant_time_compare(auth_key, record.dyndns_client.key):
-        _logger.info('Updating record %s to %s', record.name, request.remote_addr)
-        flash('Successfully updated record to new IP: %s' % request.remote_addr, 'success')
-        record.content = request.remote_addr
+        origin_ip = request.access_route[0]
+        _logger.info('Updating record %s to %s', record.name, origin_ip)
+        flash('Successfully updated record to new IP: %s' % origin_ip, 'success')
+        record.content = origin_ip
         record.domain.update_soa()
         return redirect('/')
     else:
