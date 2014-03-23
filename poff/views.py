@@ -140,11 +140,15 @@ def update_record():
     auth_key = base64.b64decode(auth_key_base64)
     if constant_time_compare(auth_key, record.dyndns_client.key):
         origin_ip = request.access_route[0]
-        _logger.info('Updating record %s to %s', record.name, origin_ip)
-        flash('Successfully updated record to new IP: %s' % origin_ip, 'success')
-        record.content = origin_ip
-        record.domain.update_soa()
-        return redirect('/')
+        if record.content != origin_ip:
+            _logger.info('Updating record %s to %s', record.name, origin_ip)
+            flash('Successfully updated record to new IP: %s' % origin_ip, 'success')
+            record.content = origin_ip
+            record.domain.update_soa()
+            return redirect('/')
+        else:
+            flash('Still on the same IP, no change applied', 'success')
+            return redirect('/')
     else:
         _logger.warning('Bad auth for trying to update record %s', record.name)
         abort(403)

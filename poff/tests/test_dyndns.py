@@ -37,10 +37,18 @@ class DynDNSTest(DBTestCase):
 
         with self.app.app_context():
             # soa serial number should have been updated
-            self.assertNotEqual(Record.query.get(self.soa_id).serial, '2014010100')
+            new_serial = Record.query.get(self.soa_id).serial
+            self.assertNotEqual(new_serial, '2014010100')
 
             record = Record.query.get(self.record_id)
             self.assertEqual(record.content, '1.2.3.4')
+
+        response = self.client.post('/update-record', data=data,
+            environ_overrides={'REMOTE_ADDR':'127.0.0.1'}, headers=headers)
+
+        # Shouldn't change anything with a second update
+        with self.app.app_context():
+            self.assertEqual(Record.query.get(self.soa_id).serial, new_serial)
 
 
     def test_update_record_invalid_key(self):
