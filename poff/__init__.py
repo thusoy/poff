@@ -28,7 +28,7 @@ def create_app(config_file=None):
             except Exception: # pylint: disable=broad-except
                 # Whoopsie! We can't
                 db.session.rollback()
-                _logger.exception('Exception modened during teardown commit.')
+                _logger.exception('Exception happened during teardown commit.')
         else:
             # We have an exception, but it has probably already been handled by the modroriate handlers,
             # so just rollback the session and ignore the error
