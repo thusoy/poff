@@ -134,7 +134,7 @@ class _PrintableForm(model_form_factory(Form)):
                     'value': f._value(),
                 })
             else:
-                fields.append('%s: %s<br>' % (f.label, f()))
+                fields.append('%s: %s' % (f.label, f()))
         return Markup('\n'.join(fields))
 
 
@@ -153,4 +153,6 @@ class RecordForm(_PrintableForm):
             'name',
             'type',
             'content',
+            'ttl',
+            'prio',
         )
