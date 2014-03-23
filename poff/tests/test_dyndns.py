@@ -27,12 +27,17 @@ class DynDNSTest(DBTestCase):
             'record': 'www.test.com',
             'key': self.client_key,
         }
-        response = self.client.post('/update-record', data=data, follow_redirects=True)
+        response = self.client.post('/update-record', data=data, follow_redirects=True,
+            environ_overrides={'REMOTE_ADDR':'1.2.3.4'}
+        )
         self.assert200(response)
 
         with self.app.app_context():
             # soa serial number should have been updated
             self.assertNotEqual(Record.query.get(self.soa_id).serial, '2014010100')
+
+            record = Record.query.get(self.record_id)
+            self.assertEqual(record.content, '1.2.3.4')
 
 
     def test_update_record_invalid_key(self):
