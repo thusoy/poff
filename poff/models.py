@@ -8,6 +8,32 @@ import base64
 import datetime
 import os
 
+# Types supported by PowerDNS, see http://doc.powerdns.com/html/types.html
+_RECORD_TYPES = (
+    'A',
+    'AAAA',
+    'AFSDB',
+    'CERT',
+    'CNAME',
+    'DNSKEY',
+    'DS',
+    'HINFO',
+    'KEY',
+    'LOC',
+    'MX',
+    'NAPTR',
+    'NS',
+    'NSEC',
+    'PTR',
+    'RP',
+    'RRSIG',
+    'SOA',
+    'SPF',
+    'SSHFP',
+    'SRV',
+    'TXT',
+)
+
 
 class Domain(db.Model):
     __tablename__ = 'domains'
@@ -30,9 +56,11 @@ class Record(db.Model):
     __tablename__ = 'records'
     id = db.Column(db.Integer, primary_key=True)
     domain_id = db.Column(db.Integer, db.ForeignKey('domains.id'))
-    name = db.Column(db.String(255))
-    type = db.Column(db.String(10))
-    content = db.Column(db.String(65535))
+    name = db.Column(db.String(255), nullable=False)
+    type = db.Column(db.String(10), info={
+        'choices': [(t, t) for t in _RECORD_TYPES],
+    })
+    content = db.Column(db.String(65535), nullable=False)
     ttl = db.Column(db.Integer, default=3600)
     prio = db.Column(db.Integer)
     change_date = db.Column(db.Integer)

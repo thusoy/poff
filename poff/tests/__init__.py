@@ -1,11 +1,19 @@
 from poff import create_app, db
 
+from functools import partial
 import os
 import tempfile
 import unittest
 
 
 class DBTestCase(unittest.TestCase):
+
+    # used to create the assertXXX helpers
+    _assert_helpers = (
+        200,
+        400,
+        403,
+    )
 
     def _set_up(self):
         self.config_file = tempfile.NamedTemporaryFile(delete=False)
@@ -20,6 +28,12 @@ class DBTestCase(unittest.TestCase):
         with self.app.app_context():
             db.create_all()
         self.client = self.app.test_client()
+        for code in DBTestCase._assert_helpers:
+            setattr(self, 'assert%d' % code, partial(self.assert_status_code, code=code))
+
+
+    def assert_status_code(self, response, code):
+        self.assertEqual(response.status_code, code)
 
 
     def _tear_down(self):
@@ -47,9 +61,5 @@ class DBTestCase(unittest.TestCase):
         return ids
 
 
-    def assert200(self, response):
-        self.assertEqual(response.status_code, 200)
-
-
     def assertForbidden(self, response):
-        self.assertEqual(response.status_code, 403)
+        self.assert403(response)

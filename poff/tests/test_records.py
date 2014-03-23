@@ -27,6 +27,16 @@ class RecordTest(DBTestCase):
             self.assertNotEqual(Record.query.get(self.soa_id).serial, '2014010100')
 
 
+    def test_invalid_create_record(self):
+        data = {
+            'name': 'ftp.test.com',
+            'type': 'BOGUS',
+            'content': 'lols',
+        }
+        response = self.client.post('/domains/%d/new_record' % self.domain_id, data=data)
+        self.assert400(response)
+
+
     def test_delete_record(self):
         response = self.client.delete('/records/%d' % self.record_id, follow_redirects=True)
         self.assert200(response)

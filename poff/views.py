@@ -116,7 +116,7 @@ def new_record(domain_id):
     else:
         _logger.debug('Record failed form validation')
         flash('Failed to validate new record, check the errors in the form below!', 'error')
-        return render_template('base.html', recordform=form)
+        return render_template('base.html', recordform=form, domainform=DomainForm()), 400
     return redirect('/')
 
 
