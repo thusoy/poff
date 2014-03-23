@@ -37,7 +37,7 @@ p19
 I8
 sS'n_statements'
 p20
-I81
+I82
 sS'n_excluded'
 p21
 I0
@@ -52,7 +52,7 @@ p24
 I0
 sbssS'hash'
 p25
-S'\xa2T*1\xc4\xffsg\xa7D\x02E\xe5C\x89\xdd'
+S"\xa3\xa0\np\xech\xe1''\x89\xd0x%5\x0cC"
 p26
 ssS'poff'
 p27
@@ -85,7 +85,7 @@ I5
 sg24
 I2
 sbssg25
-S'^\xcc\x7f\xd3)\xacq\xf5\xf9F\x88\xdbx\xc3~E'
+S'Fw\xc4\xee$w\xe5\x91d;\xf1\x02yBD\x8c'
 p33
 ssS'poff_views'
 p34
@@ -113,13 +113,13 @@ I101
 sg21
 I0
 sg22
-I4
+I3
 sg23
-I8
+I5
 sg24
-I4
+I3
 sbssg25
-S'O\xc7!\xf4\x8eCJD\x98=\x8f\xe8\x8d\xc5\x85\x07'
+S'\x9f[\xd0\x1b\xca\xed\xfab\xb1q\xfd\xac~\r\xa9\xf8'
 p41
 sssS'version'
 p42
