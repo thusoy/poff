@@ -27,7 +27,16 @@ def domains():
     if form.validate_on_submit():
         domain = Domain()
         form.populate_obj(domain)
+        soa_record = Record(content='%(domain)s hostmaster.%(domain)s 1970010100' % {
+            'domain': domain.name,
+            },
+            domain=domain,
+            type='SOA',
+            name=domain.name,
+        )
+        soa_record.update_serial()
         db.session.add(domain)
+        db.session.add(soa_record)
         _logger.info('New domain saved: %s', domain.name)
         flash('New domain added successfully!', 'success')
     else:
@@ -85,6 +94,7 @@ class RecordView(MethodOverrideView):
 
     def delete(self, record_id):
         record = Record.query.get_or_404(record_id)
+        record.domain.update_soa()
         db.session.delete(record)
         _logger.info("Deleting record %s", record.name)
         flash('Record %s deleted successfully.' % record.name, 'success')
@@ -99,6 +109,7 @@ def new_record(domain_id):
         record = Record()
         record.domain = domain
         form.populate_obj(record)
+        domain.update_soa()
         db.session.add(record)
         _logger.info('New record saved: %s', record.name)
         flash('New record saved successfully!', 'success')
@@ -131,6 +142,7 @@ def update_record():
         _logger.info('Updating record %s to %s', record.name, request.remote_addr)
         flash('Successfully updated record to new IP: %s' % request.remote_addr, 'success')
         record.content = request.remote_addr
+        record.domain.update_soa()
         return redirect('/')
     else:
         _logger.warning('Bad auth for trying to update record %s', record.name)

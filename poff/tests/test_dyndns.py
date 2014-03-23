@@ -5,10 +5,12 @@ class DynDNSTest(DBTestCase):
 
     def set_up(self):
         domain = Domain(name='test.com')
+        soa_record = Record(name='test.com', type='SOA', content='x y 2014010100', domain=domain)
         record = Record(name='www.test.com', type='A', content='127.0.0.1', domain=domain)
         client = DynDNSClient(record=record)
         self.client_key = client.b64_key
-        _, self.record_id, self.client_id = self.add_objects(domain, record, client)
+        _, self.soa_id, self.record_id, self.client_id = self.add_objects(domain, soa_record,
+            record, client)
 
 
     def test_create_client(self):
@@ -28,6 +30,10 @@ class DynDNSTest(DBTestCase):
         response = self.client.post('/update-record', data=data, follow_redirects=True)
         self.assert200(response)
 
+        with self.app.app_context():
+            # soa serial number should have been updated
+            self.assertNotEqual(Record.query.get(self.soa_id).serial, '2014010100')
+
 
     def test_update_record_invalid_key(self):
         data = {
@@ -36,6 +42,9 @@ class DynDNSTest(DBTestCase):
         }
         response = self.client.post('/update-record', data=data)
         self.assertForbidden(response)
+        with self.app.app_context():
+            # soa serial number should NOT have been updated
+            self.assertEqual(Record.query.get(self.soa_id).serial, '2014010100')
 
 
     def test_delete_client(self):
