@@ -34,10 +34,10 @@ p18
 I1
 sS'n_branches'
 p19
-I4
+I8
 sS'n_statements'
 p20
-I54
+I81
 sS'n_excluded'
 p21
 I0
@@ -52,7 +52,7 @@ p24
 I0
 sbssS'hash'
 p25
-S"\xfc'a|\x1eN\x1e\x90z*\td\xd9\xd7K\xf2"
+S'\xa2T*1\xc4\xffsg\xa7D\x02E\xe5C\x89\xdd'
 p26
 ssS'poff'
 p27
@@ -109,7 +109,7 @@ I1
 sg19
 I12
 sg20
-I95
+I101
 sg21
 I0
 sg22
@@ -119,7 +119,7 @@ I8
 sg24
 I4
 sbssg25
-S'\xfa\xd4bn\xa1\xc8>\xdb\x1d\xde\xa8\xdc\x19\xa0\x04\x12'
+S'O\xc7!\xf4\x8eCJD\x98=\x8f\xe8\x8d\xc5\x85\x07'
 p41
 sssS'version'
 p42
