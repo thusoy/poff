@@ -41,7 +41,7 @@ class DomainTest(DBTestCase):
 
     def test_update_soa_serial(self):
         soa_record = Record(type='SOA', content='x y 2014010100')
-        new_date = datetime.date(2014, 01, 02)
+        new_date = datetime.date(2014, 1, 2)
         soa_record.update_serial(new_date)
         self.assertEqual(soa_record.serial, '2014010200')
         soa_record.update_serial(new_date)
