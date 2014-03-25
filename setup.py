@@ -36,6 +36,7 @@ setup(
     package_data={
         '': [
             'templates/*.html',
+            'static/*.css',
         ],
     },
     classifiers=[
