@@ -133,7 +133,7 @@ def new_dyndns_client(record_id):
 @mod.route('/update-record', methods=['POST'])
 def update_record():
     record_name = request.form.get('record')
-    record = Record.query.filter_by(name=record_name).first()
+    record = Record.query.filter_by(name=record_name, type='A').first()
     if not record or not record.dyndns_client:
         abort(404)
     auth_key_base64 = request.form.get('key', '')
