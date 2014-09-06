@@ -27,6 +27,14 @@ class DomainTest(DBTestCase):
             self.assertEqual(soa_record.serial, today.strftime('%Y%m%d00'))
 
 
+    def test_create_invalid_domain(self):
+        data = {
+            'name': 'foo',
+        }
+        response = self.client.post('/domains', data=data, follow_redirects=True)
+        self.assert400(response)
+
+
     def test_delete_domain(self):
         response = self.client.delete('/domains/%d' % self.domain_id, follow_redirects=True)
         self.assert200(response)
