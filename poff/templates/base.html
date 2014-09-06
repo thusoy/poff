@@ -4,26 +4,22 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>Poff admin</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper container">
     <header>
 
       {% for category, msg in get_flashed_messages(with_categories=true) %}
-        <div class="msg-{{ category }}">
+        <div class="alert alert-{{ category }}">
           <span>
             <strong>{{ category.upper() }}: </strong>
             {{ msg }}
         </div>
       {% endfor %}
 
-      <h1>Poff</h1>
-
-      <p>
-        Manage your dns here please.
-      </p>
     </header>
 
     <section>
@@ -31,31 +27,45 @@
       <h1>Domains</h1>
 
       {% for domain in domains %}
-        <h2>{{ domain.name }}</h2>
-        <form action="{{ url_for('.domain_details', domain_id=domain.id) }}" method="post">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="Delete domain">
-        </form>
-        <h3>Records</h3>
-        {% for record in domain.records %}
-            <p>
-              {{ record.name }} - {{ record.type }} - {{ record.content }}
-              {% if record.dyndns_client %}
-                - Key: {{ record.dyndns_client.printable_key }}
-              {% else %}
-                <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post">
-                  <input type="submit" value="Generate new DynDNS client">
-                </form>
-              {% endif %}
-              <form action="{{ url_for('.record_details', record_id=record.id) }}" method="post">
-                <input type="hidden" value="DELETE" name="_method">
-                <input type="submit" value="Delete record">
-              </form>
-            </p>
-        {% endfor %}
-        <form action="/domains/{{ domain.id }}/new_record" method="post">
+        <h2>
+          {{ domain.name }}
+          <form action="{{ url_for('.domain_details', domain_id=domain.id) }}" method="post" class="form-inline">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete domain" class="btn btn-danger btn-xs">
+          </form>
+        </h2>
+
+        <table class="table">
+          <tr><th>Domain</th><th>Type</th><th>Value</th><th>DynDNS</th><th>Actions</th></tr>
+          {% for record in domain.records %}
+            {% if record.type != 'SOA' %}
+              <tr>
+                <td>{{ record.name }}</td>
+                <td>{{ record.type }}</td>
+                <td>{{ record.content }}</td>
+                <td>
+                  {% if record.dyndns_client %}
+                    <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.printable_key }}">
+                  {% else %}
+                    <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post" class="form-inline">
+                      <input type="submit" value="Generate new DynDNS client" class="btn btn-primary btn-xs">
+                    </form>
+                  {% endif %}
+                </td>
+                <td>
+                  <form action="{{ url_for('.record_details', record_id=record.id) }}" method="post" class="form-inline">
+                    <input type="hidden" value="DELETE" name="_method">
+                    <input type="submit" value="Delete record" class="btn btn-danger btn-xs">
+                  </form>
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </table>
+
+        <form action="{{ url_for('.new_record', domain_id=domain.id) }}" method="post">
           {{ recordform.render() }}
-          <input type="submit" value="New record">
+          <input type="submit" value="New record" class="btn btn-primary">
         </form>
       {% endfor %}
 
@@ -67,12 +77,15 @@
 
     </section>
 
-    <footer>
-      <p><a href="https://github.com/thusoy/poff">Poff</a>, the minimal pdns frontend</p>
-      <p>Maintained by <a href="http://github.com/thusoy">Tarjei Husøy</a>
-    </footer>
 
   </div><!-- /wrapper -->
+
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted"><a href="https://github.com/thusoy/poff">Poff</a>, the minimal pdns frontend</p>
+      <p class="text-muted">Maintained by <a href="http://github.com/thusoy">Tarjei Husøy</a>
+    </div>
+  </footer>
 
 </body>
 </html>
