@@ -1,7 +1,6 @@
-from . import db
+from . import db, base62
 from .models import Domain, DomainForm, DynDNSClient, Record, RecordForm
 
-import base64
 from flask import abort, redirect, render_template, flash, request, Blueprint
 from flask.views import MethodView
 from logging import getLogger
@@ -136,9 +135,9 @@ def update_record():
     record = Record.query.filter_by(name=record_name, type='A').first()
     if not record or not record.dyndns_client:
         abort(404)
-    auth_key_base64 = request.form.get('key', '')
-    auth_key = base64.b64decode(auth_key_base64)
-    if constant_time_compare(auth_key, record.dyndns_client.key):
+    submitted_key = str(request.form.get('key', ''))
+    record_key = base62.encode(record.dyndns_client.key)
+    if constant_time_compare(submitted_key, record_key):
         origin_ip = request.access_route[0]
         if record.content != origin_ip:
             _logger.info('Updating record %s to %s', record.name, origin_ip)

@@ -4,7 +4,7 @@ from flask import Markup
 from flask.ext.wtf import Form
 from wtforms.fields import HiddenField
 from wtforms_alchemy import model_form_factory
-import base64
+import base62
 import datetime
 import os
 
@@ -120,7 +120,7 @@ class DynDNSClient(db.Model):
 
     @property
     def printable_key(self):
-        return base64.b64encode(self.key)
+        return base62.encode(self.key)
 
 
 class _PrintableForm(model_form_factory(Form)):
