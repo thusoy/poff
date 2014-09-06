@@ -37,7 +37,7 @@ p19
 I8
 sS'n_statements'
 p20
-I81
+I83
 sS'n_excluded'
 p21
 I0
@@ -52,7 +52,7 @@ p24
 I0
 sbssS'hash'
 p25
-S'\xb6>\xcc\xd5c\xe1\xe5\xb8\xa2\xe2\xa8\xb5\x95\x07\xdaC'
+S'Hc\xed\xdei\x18\xadI\xe4W\xfb\xfcwx\xc1\x87'
 p26
 ssS'poff'
 p27
@@ -107,9 +107,9 @@ NtRp39
 g18
 I1
 sg19
-I14
+I16
 sg20
-I104
+I111
 sg21
 I0
 sg22
@@ -119,7 +119,7 @@ I1
 sg24
 I1
 sbssg25
-S"'\x7fu\x8cTj\xd0\xd7\x9f\xfb\xc5\xe2\xafk\xa0\x01"
+S'\xad\xa9\x14\x83K\x04N\x00\xb0n\xbf\xb8*\x9c\x9a\xb2'
 p41
 ssS'poff_base62'
 p42
