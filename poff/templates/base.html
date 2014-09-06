@@ -48,7 +48,7 @@
                     <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.printable_key }}">
                   {% else %}
                     <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post" class="form-inline">
-                      <input type="submit" value="Generate new DynDNS client" class="btn btn-primary btn-xs">
+                      <input type="submit" value="Generate DynDNS secret" class="btn btn-primary btn-xs">
                     </form>
                   {% endif %}
                 </td>
