@@ -13,6 +13,7 @@ class DBTestCase(unittest.TestCase):
         200,
         400,
         403,
+        404,
     )
 
     def _set_up(self):

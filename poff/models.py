@@ -113,8 +113,12 @@ class DynDNSClient(db.Model):
 
 
     def __init__(self, *args, **kwargs):
-        self.key = os.urandom(30)
+        self.set_new_key()
         super(DynDNSClient, self).__init__(*args, **kwargs)
+
+
+    def set_new_key(self):
+        self.key = os.urandom(30)
 
 
     @property

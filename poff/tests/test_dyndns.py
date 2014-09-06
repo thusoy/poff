@@ -80,3 +80,16 @@ class DynDNSTest(DBTestCase):
         with self.app.app_context():
             clients = DynDNSClient.query.all()
             self.assertEqual(len(clients), 0)
+
+
+    def test_rekey_record(self):
+        response = self.client.post('/records/%d/rekey' % self.record_id, follow_redirects=True)
+        self.assert200(response)
+        with self.app.app_context():
+            new_key = Record.query.get(self.record_id).dyndns_client.printable_key
+            self.assertNotEqual(new_key, self.client_key)
+
+
+    def test_rekey_invalid(self):
+        response = self.client.post('/records/0101/rekey')
+        self.assert404(response)

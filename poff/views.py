@@ -129,6 +129,16 @@ def new_dyndns_client(record_id):
     return redirect('/')
 
 
+@mod.route('/records/<int:record_id>/rekey', methods=['POST'])
+def rekey_dyndns_record(record_id):
+    record = Record.query.get(record_id)
+    if not record or not record.dyndns_client:
+        abort(404)
+    dyndns_client = record.dyndns_client
+    dyndns_client.set_new_key()
+    return redirect('/')
+
+
 @mod.route('/update-record', methods=['POST'])
 def update_record():
     record_name = request.form.get('record')
