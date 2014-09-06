@@ -29,7 +29,7 @@ class DomainTest(DBTestCase):
 
     def test_create_invalid_domain(self):
         data = {
-            'name': 'foo',
+            'name': '',
         }
         response = self.client.post('/domains', data=data, follow_redirects=True)
         self.assert400(response)
