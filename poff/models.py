@@ -119,7 +119,7 @@ class DynDNSClient(db.Model):
 
 
     @property
-    def b64_key(self):
+    def printable_key(self):
         return base64.b64encode(self.key)
 
 

@@ -41,7 +41,7 @@
             <p>
               {{ record.name }} - {{ record.type }} - {{ record.content }}
               {% if record.dyndns_client %}
-                - Key: {{ record.dyndns_client.b64_key }}
+                - Key: {{ record.dyndns_client.printable_key }}
               {% else %}
                 <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post">
                   <input type="submit" value="Generate new DynDNS client">
