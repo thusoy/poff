@@ -4,9 +4,44 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>Poff admin</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <style>
+    /* Styles inlined because of very small amount of styles, and to remove
+    the need to serve static files separatey. */
+    body {
+        background-color: #ddd;
+        /* Margin bottom by footer height */
+        margin-bottom: 68px;
+    }
+
+    .form-inline {
+        display: inline-block;
+    }
+
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 68px;
+      background-color: #ccc;
+    }
+
+    .footer p {
+        margin-top: 8px;
+    }
+
+    .input-copyable-key {
+        font-family: "Courier", "monospace";
+        width: 41ch;
+    }
+  </style>
 </head>
 <body>
   <div class="wrapper container">
