@@ -17,7 +17,7 @@ if sys.version_info < (2, 7, 0):
 
 setup(
     name='poff',
-    version='0.1.8',
+    version='1.0.0',
     author='Tarjei Husøy',
     author_email='tarjei@roms.no',
     url='https://github.com/thusoy/poff',
