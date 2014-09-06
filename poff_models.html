@@ -230,7 +230,7 @@
 <p id='t4' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>flask</span><span class='op'>.</span><span class='nam'>ext</span><span class='op'>.</span><span class='nam'>wtf</span> <span class='key'>import</span> <span class='nam'>Form</span><span class='strut'>&nbsp;</span></p>
 <p id='t5' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>wtforms</span><span class='op'>.</span><span class='nam'>fields</span> <span class='key'>import</span> <span class='nam'>HiddenField</span><span class='strut'>&nbsp;</span></p>
 <p id='t6' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>wtforms_alchemy</span> <span class='key'>import</span> <span class='nam'>model_form_factory</span><span class='strut'>&nbsp;</span></p>
-<p id='t7' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>base64</span><span class='strut'>&nbsp;</span></p>
+<p id='t7' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>base62</span><span class='strut'>&nbsp;</span></p>
 <p id='t8' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>datetime</span><span class='strut'>&nbsp;</span></p>
 <p id='t9' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>os</span><span class='strut'>&nbsp;</span></p>
 <p id='t10' class='pln'><span class='strut'>&nbsp;</span></p>
@@ -345,8 +345,8 @@
 <p id='t119' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t120' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t121' class='stm run hide_run'>&nbsp; &nbsp; <span class='op'>@</span><span class='nam'>property</span><span class='strut'>&nbsp;</span></p>
-<p id='t122' class='pln'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>b64_key</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t123' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>base64</span><span class='op'>.</span><span class='nam'>b64encode</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>.</span><span class='nam'>key</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t122' class='pln'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>printable_key</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t123' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>base62</span><span class='op'>.</span><span class='nam'>encode</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>.</span><span class='nam'>key</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t124' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t125' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t126' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>_PrintableForm</span><span class='op'>(</span><span class='nam'>model_form_factory</span><span class='op'>(</span><span class='nam'>Form</span><span class='op'>)</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
