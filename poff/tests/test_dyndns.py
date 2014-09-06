@@ -63,6 +63,18 @@ class DynDNSTest(DBTestCase):
             self.assertEqual(Record.query.get(self.soa_id).serial, '2014010100')
 
 
+    def test_update_record_invalid_record(self):
+        data = {
+            'record': 'foo.test.com',
+            'key': self.client_key,
+        }
+        response = self.client.post('/update-record', data=data)
+        self.assertEqual(response.status_code, 404)
+        with self.app.app_context():
+            # soa serial number should NOT have been updated
+            self.assertEqual(Record.query.get(self.soa_id).serial, '2014010100')
+
+
     def test_delete_client(self):
         self.assert200(self.client.delete('/dyndns-clients/%d' % self.client_id, follow_redirects=True))
         with self.app.app_context():
