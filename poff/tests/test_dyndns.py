@@ -30,10 +30,10 @@ class DynDNSTest(DBTestCase):
         headers = {
             'X-Forwarded-For': '1.2.3.4',
         }
-        response = self.client.post('/update-record', data=data, follow_redirects=True,
+        response = self.client.post('/update-record', data=data,
             environ_overrides={'REMOTE_ADDR':'127.0.0.1'}, headers=headers,
         )
-        self.assert200(response)
+        self.assert201(response)
 
         with self.app.app_context():
             # soa serial number should have been updated

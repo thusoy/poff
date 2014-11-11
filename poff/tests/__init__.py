@@ -11,6 +11,7 @@ class DBTestCase(unittest.TestCase):
     # used to create the assertXXX helpers
     _assert_helpers = (
         200,
+        201,
         400,
         403,
         404,

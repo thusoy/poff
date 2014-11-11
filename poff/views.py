@@ -154,10 +154,10 @@ def update_record():
             flash('Successfully updated record to new IP: %s' % origin_ip, 'success')
             record.content = origin_ip
             record.domain.update_soa()
-            return redirect('/')
+            return '', 201
         else:
             flash('Still on the same IP, no change applied', 'success')
-            return redirect('/')
+            return ''
     else:
         _logger.warning('Bad auth for trying to update record %s', record.name)
         abort(403)
