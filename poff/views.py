@@ -12,7 +12,7 @@ mod = Blueprint('views', __name__)
 
 @mod.route('/')
 def main():
-    domains = Domain.query.all()
+    domains = Domain.query.order_by(Domain.name).all()
     return render_template('base.html', **{
         'domains': domains,
         'domainform': DomainForm(),
