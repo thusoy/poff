@@ -80,7 +80,7 @@
                 <td>{{ record.content }}</td>
                 <td>
                   {% if record.dyndns_client %}
-                    <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.printable_key }}">
+                    <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.key }}">
                     <form action="{{ url_for('.rekey_dyndns_record', record_id=record.id) }}" method="post" class="form-inline">
                       <input type="submit" value="Rekey" class="btn btn-primary btn-xs">
                     </form>

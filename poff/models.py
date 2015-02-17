@@ -108,7 +108,7 @@ class Record(db.Model):
 class DynDNSClient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     record_id = db.Column(db.Integer, db.ForeignKey('records.id'))
-    key = db.Column(db.LargeBinary(64), nullable=False)
+    key = db.Column(db.String(64), nullable=False)
     record = db.relationship('Record', backref=db.backref('dyndns_client', uselist=False))
 
 
@@ -118,12 +118,7 @@ class DynDNSClient(db.Model):
 
 
     def set_new_key(self):
-        self.key = os.urandom(30)
-
-
-    @property
-    def printable_key(self):
-        return base62.encode(self.key)
+        self.key = base62.encode(os.urandom(30))
 
 
 class _PrintableForm(model_form_factory(Form)):

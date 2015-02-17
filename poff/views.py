@@ -145,8 +145,8 @@ def update_record():
     record = Record.query.filter_by(name=record_name, type='A').first()
     if not record or not record.dyndns_client:
         abort(404)
-    submitted_key = str(request.form.get('key', ''))
-    record_key = base62.encode(record.dyndns_client.key)
+    submitted_key = request.form.get('key', '')
+    record_key = record.dyndns_client.key
     if constant_time_compare(submitted_key, record_key):
         origin_ip = request.access_route[0]
         if origin_ip.startswith('::ffff:'):

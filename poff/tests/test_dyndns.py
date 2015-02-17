@@ -8,7 +8,7 @@ class DynDNSTest(DBTestCase):
         soa_record = Record(name='test.com', type='SOA', content='x y 2014010100', domain=domain)
         record = Record(name='www.test.com', type='A', content='127.0.0.1', domain=domain)
         client = DynDNSClient(record=record)
-        self.client_key = client.printable_key
+        self.client_key = client.key
         _, self.soa_id, self.record_id, self.client_id = self.add_objects(domain, soa_record,
             record, client)
 
@@ -102,7 +102,7 @@ class DynDNSTest(DBTestCase):
         response = self.client.post('/records/%d/rekey' % self.record_id, follow_redirects=True)
         self.assert200(response)
         with self.app.app_context():
-            new_key = Record.query.get(self.record_id).dyndns_client.printable_key
+            new_key = Record.query.get(self.record_id).dyndns_client.key
             self.assertNotEqual(new_key, self.client_key)
 
 
