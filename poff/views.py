@@ -149,6 +149,8 @@ def update_record():
     record_key = base62.encode(record.dyndns_client.key)
     if constant_time_compare(submitted_key, record_key):
         origin_ip = request.access_route[0]
+        if origin_ip.startswith('::ffff:'):
+            origin_ip = origin_ip[len('::ffff:'):]
         if record.content != origin_ip:
             _logger.info('Updating record %s to %s', record.name, origin_ip)
             flash('Successfully updated record to new IP: %s' % origin_ip, 'success')

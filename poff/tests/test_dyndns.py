@@ -51,6 +51,22 @@ class DynDNSTest(DBTestCase):
             self.assertEqual(Record.query.get(self.soa_id).serial, new_serial)
 
 
+    def test_update_tunneled_ipv4_record(self):
+        origin = '::ffff:10.10.10.10'
+        data = {
+            'record': 'www.test.com',
+            'key': self.client_key,
+        }
+        headers = {'X-Forwarded-For': origin}
+        response = self.client.post('/update-record', data=data, follow_redirects=True,
+            environ_overrides={'REMOTE_ADDR': '127.0.0.1'}, headers=headers)
+        self.assert201(response)
+
+        # Test that correct IP was set
+        with self.app.app_context():
+            self.assertEqual(Record.query.get(self.record_id).content, '10.10.10.10')
+
+
     def test_update_record_invalid_key(self):
         data = {
             'record': 'www.test.com',
