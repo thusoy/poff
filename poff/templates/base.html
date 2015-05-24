@@ -78,7 +78,7 @@
               <tr>
                 <td>{{ record.name }}</td>
                 <td>{{ record.type }}</td>
-                <td>{{ record.content }}</td>
+                <td title="{{ record.content }}">{{ record.content|truncate(30) }}</td>
                 <td>
                   {% if record.dyndns_client %}
                     <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.printable_key }}">
