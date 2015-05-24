@@ -85,7 +85,7 @@
                     <form action="{{ url_for('.rekey_dyndns_record', record_id=record.id) }}" method="post" class="form-inline">
                       <input type="submit" value="Rekey" class="btn btn-primary btn-xs">
                     </form>
-                  {% else %}
+                  {% elif record.type in ('A', 'AAAA') %}
                     <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post" class="form-inline">
                       <input type="submit" value="Generate DynDNS secret" class="btn btn-primary btn-xs">
                     </form>
