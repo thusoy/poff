@@ -44,6 +44,11 @@ class Domain(db.Model):
     notified_serial = db.Column(db.Integer)
     account = db.Column(db.String(40))
 
+    @property
+    def records(self):
+        """ Sort records such that subdomains are grouped together. """
+        return sorted(self._records, key=lambda r: '.'.join(reversed(r.name.split('.'))))
+
 
     def update_soa(self):
         """ Update the serial number of the SOA associated with this domain. """
@@ -64,7 +69,7 @@ class Record(db.Model):
     prio = db.Column(db.Integer)
     change_date = db.Column(db.Integer)
     disabled = db.Column(db.Boolean, default=False)
-    domain = db.relationship('Domain', backref=db.backref('records', lazy='dynamic', cascade='all,delete'))
+    domain = db.relationship('Domain', backref=db.backref('_records', lazy='dynamic', cascade='all,delete'))
 
     @property
     def serial(self):

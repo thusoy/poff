@@ -54,3 +54,25 @@ class RecordTest(DBTestCase):
         }
         self.assert200(self.client.post('/records/%d' % self.record_id, data=data,
             follow_redirects=True))
+
+
+    def test_record_sort_order(self):
+        subsubdomains = ['a', 'z', 'b']
+        for num, subsubdomain in enumerate(subsubdomains):
+            data = {
+                'name': '%s.subdomain.test.com' % subsubdomain,
+                'type': 'A',
+                'content': '127.0.0.%d' % num
+            }
+            response = self.client.post('/domains/%d/new_record' % self.domain_id, data=data,
+                follow_redirects=True)
+            self.assert200(response)
+        subsubdomains.sort()
+        with self.app.app_context():
+            domain = Domain.query.get(self.domain_id)
+            num = 0
+            for record in domain.records:
+                if not 'subdomain' in record.name:
+                    continue
+                self.assertEqual(record.name, subsubdomains[num] + '.subdomain.test.com')
+                num += 1
