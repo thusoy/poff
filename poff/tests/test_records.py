@@ -37,6 +37,20 @@ class RecordTest(DBTestCase):
         self.assert400(response)
 
 
+    def test_modify_record(self):
+        data = {
+            'name': 'www.test.com',
+            'type': 'A',
+            'content': '127.0.0.2',
+        }
+        response = self.client.post('/records/%d' % self.record_id, data=data,
+            follow_redirects=True)
+        self.assert200(response)
+        with self.app.app_context():
+            record = Record.query.get(self.record_id)
+            self.assertEqual(record.content, '127.0.0.2')
+
+
     def test_delete_record(self):
         response = self.client.delete('/records/%d' % self.record_id, follow_redirects=True)
         self.assert200(response)

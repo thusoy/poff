@@ -52,6 +52,15 @@
           <span>
             <strong>{{ category.upper() }}: </strong>
             {{ msg }}
+            {% if form_errors %}
+              <ul>
+                {% for field, errors in form_errors.items() %}
+                  <li>
+                    {{ field }}: {{ ', '.join(errors) }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </span>
         </div>
       {% endfor %}
@@ -65,9 +74,13 @@
       {% for domain in domains %}
         <h2>
           {{ domain.name }}
-          <form action="{{ url_for('.domain_details', domain_id=domain.id) }}" method="post" class="form-inline">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete domain" class="btn btn-danger btn-xs">
+          <form method="post"
+                action="{{ url_for('.domain_details', domain_id=domain.id) }}"
+                class="form-inline">
+            <input type="hidden"name="_method" value="DELETE">
+            <input type="submit"
+                   value="Delete domain"
+                   class="btn btn-danger btn-xs">
           </form>
         </h2>
 
@@ -76,14 +89,30 @@
           {% for record in domain.records %}
             {% if record.type != 'SOA' %}
               <tr>
-                <td>{{ record.name }}</td>
+                <td>
+                  <input type="text"
+                         name="name"
+                         form="record-form-{{ loop.index }}"
+                         value="{{ record.name }}">
+                </td>
                 <td>{{ record.type }}</td>
-                <td title="{{ record.content }}">{{ record.content|truncate(30) }}</td>
+                <td title="{{ record.content }}">
+                  <input type="text"
+                         name="content"
+                         value="{{ record.content }}"
+                         form="record-form-{{ loop.index }}">
+                </td>
                 <td>
                   {% if record.dyndns_client %}
-                    <input class="input-copyable-key" type="text" value="{{ record.dyndns_client.printable_key }}">
-                    <form action="{{ url_for('.rekey_dyndns_record', record_id=record.id) }}" method="post" class="form-inline">
-                      <input type="submit" value="Rekey" class="btn btn-primary btn-xs">
+                    <input type="text"
+                           class="input-copyable-key"
+                           value="{{ record.dyndns_client.printable_key }}">
+                    <form method="post"
+                          action="{{ url_for('.rekey_dyndns_record', record_id=record.id) }}"
+                          class="form-inline">
+                      <input type="submit"
+                             value="Rekey"
+                             class="btn btn-primary btn-xs">
                     </form>
                   {% elif record.type in ('A', 'AAAA') %}
                     <form action="{{ url_for('.new_dyndns_client', record_id=record.id) }}" method="post" class="form-inline">
@@ -92,9 +121,30 @@
                   {% endif %}
                 </td>
                 <td>
-                  <form action="{{ url_for('.record_details', record_id=record.id) }}" method="post" class="form-inline">
-                    <input type="hidden" value="DELETE" name="_method">
-                    <input type="submit" value="Delete record" class="btn btn-danger btn-xs">
+                  {# Submit update #}
+                  <form method="post"
+                        id="record-form-{{ loop.index }}"
+                        action="{{ url_for('.record_details', record_id=record.id) }}"
+                        class="form-inline">
+                    {{ recordform.csrf_token }}
+                    <input type="hidden"
+                           value="{{ record.type }}"
+                           name="type">
+                    <input type="submit"
+                           value="Update record"
+                           class="btn btn-primary btn-xs">
+                  </form>
+
+                  {# Delete record form #}
+                  <form method="post"
+                        class="form-inline"
+                        action="{{ url_for('.record_details', record_id=record.id) }}">
+                    <input type="hidden"
+                           value="DELETE"
+                           name="_method">
+                    <input type="submit"
+                           value="Delete record"
+                           class="btn btn-danger btn-xs">
                   </form>
                 </td>
               </tr>

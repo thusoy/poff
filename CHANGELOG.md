@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Added
+- Allow modifying existing records ([#1](https://github.com/thusoy/poff/issues/1))
 
 ## [1.1.2] - 2015-05-24
 ### Added
