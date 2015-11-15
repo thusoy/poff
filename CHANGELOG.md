@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - unreleased
 ### Added
 - Allow modifying existing records ([#1](https://github.com/thusoy/poff/issues/1))
+- No-mail SPF record is added by default for new domains ([#6](https://github.com/thusoy/poff/issues/6))
 
 ## [1.1.2] - 2015-05-24
 ### Added
