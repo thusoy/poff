@@ -26,6 +26,11 @@ class DomainTest(DBTestCase):
             today = datetime.datetime.now()
             self.assertEqual(soa_record.serial, today.strftime('%Y%m%d00'))
 
+            # No-mail SPF record should have been created
+            spf_record = Record.query.filter(Record.type=='TXT',
+                Record.name=='test.com').one()
+            self.assertEqual(spf_record.content, 'v=spf1 -all')
+
 
     def test_create_invalid_domain(self):
         data = {

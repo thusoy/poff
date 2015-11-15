@@ -26,6 +26,7 @@ def domains():
     if form.validate_on_submit():
         domain = Domain()
         form.populate_obj(domain)
+
         soa_record = Record(content='%(domain)s hostmaster.%(domain)s 1970010100' % {
             'domain': domain.name,
             },
@@ -34,8 +35,13 @@ def domains():
             name=domain.name,
         )
         soa_record.update_serial()
+
+        spf_record = Record(content='v=spf1 -all', domain=domain, type='TXT',
+            name=domain.name)
+
         db.session.add(domain)
         db.session.add(soa_record)
+        db.session.add(spf_record)
         _logger.info('New domain saved: %s', domain.name)
         flash('New domain added successfully!', 'success')
     else:
