@@ -91,6 +91,28 @@ class DomainView(MethodOverrideView):
 
 class RecordView(MethodOverrideView):
 
+    def post(self, record_id):
+        record = Record.query.get_or_404(record_id)
+        form = RecordForm()
+        if form.validate_on_submit():
+            form.populate_obj(record)
+            domain = record.domain
+            domain.update_soa()
+            _logger.info('Record %s modified', record.name)
+            flash('Record successfully modified.', 'success')
+            return redirect('/')
+        else:
+            _logger.info('Record modification failed form validation: %s', form.errors)
+            flash('Failed to validate record modifications', 'warning')
+            context = {
+                'form_errors': form.errors,
+                'domains': Domain.query.order_by(Domain.name).all(),
+                'recordform': form,
+                'domainform': DomainForm(),
+            }
+            return render_template('base.html', **context), 400
+
+
     def delete(self, record_id):
         record = Record.query.get_or_404(record_id)
         record.domain.update_soa()
@@ -114,7 +136,7 @@ def new_record(domain_id):
         flash('New record saved successfully!', 'success')
     else:
         _logger.debug('Record failed form validation')
-        flash('Failed to validate new record, check the errors in the form below!', 'error')
+        flash('Failed to validate new record, check the errors in the form below!', 'warning')
         return render_template('base.html', recordform=form, domainform=DomainForm()), 400
     return redirect('/')
 

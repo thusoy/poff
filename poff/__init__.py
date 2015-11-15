@@ -13,6 +13,8 @@ def create_app(config_file=None):
     else:
         app.config.from_envvar('POFF_CONFIG_FILE')
 
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     db.init_app(app)
 
     from . import views
