@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from logging import getLogger
+import textwrap
 
 _logger = getLogger('poff')
 
@@ -37,5 +38,48 @@ def create_app(config_file=None):
             db.session.rollback()
         db.session.remove()
 
+    @app.errorhandler(500)
+    def server_error(error):
+        generic_error_handler(error)
+        # Don't rely on any special mechanisms such as template loading or other resources,
+        # as we don't know where the error is.
+        return textwrap.dedent('''\
+        <!doctype html>
+        <title>Internal Server Error</title>
+        <h1>Internal Server Error</h1>
+        <p>
+            I'm very sorry to report this, but something has gone wrong on the server.
+            If you have administrator access, check the logs for more details, otherwise
+            you should probably gently notify your sysadmin of the failure.
+        ''')
+
 
     return app
+
+def generic_error_handler(exception):
+    """ Log exception to the standard logger. """
+    log_msg = textwrap.dedent("""Error occured.
+        Path:                 %s
+        Params:               %s
+        HTTP Method:          %s
+        Client IP Address:    %s
+        User Agent:           %s
+        User Platform:        %s
+        User Browser:         %s
+        User Browser Version: %s
+        HTTP Headers:         %s
+        Exception:            %s
+        """ % (
+            request.path,
+            request.values,
+            request.method,
+            request.remote_addr,
+            request.user_agent.string,
+            request.user_agent.platform,
+            request.user_agent.browser,
+            request.user_agent.version,
+            request.headers,
+            exception
+        )
+    )
+    _logger.exception(log_msg)
