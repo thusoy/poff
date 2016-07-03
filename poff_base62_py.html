@@ -44,22 +44,22 @@
 
 <div class="help_panel">
     <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
-<p class="legend">Hot-keys on this page</p>
+    <p class="legend">Hot-keys on this page</p>
     <div>
-<p class="keyhelp">
+    <p class="keyhelp">
         <span class="key">r</span>
         <span class="key">m</span>
         <span class="key">x</span>
         <span class="key">p</span> &nbsp; toggle line displays
     </p>
-<p class="keyhelp">
+    <p class="keyhelp">
         <span class="key">j</span>
         <span class="key">k</span> &nbsp; next/prev highlighted chunk
     </p>
-<p class="keyhelp">
+    <p class="keyhelp">
         <span class="key">0</span> &nbsp; (zero) top of page
     </p>
-<p class="keyhelp">
+    <p class="keyhelp">
         <span class="key">1</span> &nbsp; (one) first highlighted chunk
     </p>
     </div>
@@ -150,7 +150,7 @@
 <p id="n79" class="pln"><a href="#n79">79</a></p>
 <p id="n80" class="stm run hide_run"><a href="#n80">80</a></p>
 <p id="n81" class="stm run hide_run"><a href="#n81">81</a></p>
-                
+
             </td>
             <td class="text">
 <p id="t1" class="stm run hide_run"><span class="key">import</span> <span class="nam">math</span><span class="strut">&nbsp;</span></p>
@@ -160,81 +160,81 @@
 <p id="t5" class="stm run hide_run"><span class="nam">ALPHABET</span> <span class="op">=</span> <span class="nam">string</span><span class="op">.</span><span class="nam">digits</span> <span class="op">+</span> <span class="nam">string</span><span class="op">.</span><span class="nam">ascii_letters</span><span class="strut">&nbsp;</span></p>
 <p id="t6" class="stm run hide_run"><span class="nam">PY2</span> <span class="op">=</span> <span class="nam">sys</span><span class="op">.</span><span class="nam">version_info</span><span class="op">[</span><span class="num">0</span><span class="op">]</span> <span class="op">==</span> <span class="num">2</span><span class="strut">&nbsp;</span></p>
 <p id="t7" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t8" class="stm par run hide_run"><span class="annotate" title="Line 8 was executed, but never jumped to line 12">8&#x202F;&#x219B;&#x202F;12 [?]</span><span class="key">if</span> <span class="nam">PY2</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t9" class="stm run hide_run">&nbsp; &nbsp; <span class="key">def</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">char</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t10" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">ord</span><span class="op">(</span><span class="nam">char</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t8" class="stm par run hide_run"><span class="annotate short">8&#x202F;&#x219B;&#x202F;12</span><span class="annotate long">line 8 didn't jump to line 12, because the condition on line 8 was never false</span><span class="key">if</span> <span class="nam">PY2</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t9" class="stm run hide_run">    <span class="key">def</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">char</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t10" class="stm run hide_run">        <span class="key">return</span> <span class="nam">ord</span><span class="op">(</span><span class="nam">char</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t11" class="pln"><span class="key">else</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t12" class="stm mis">&nbsp; &nbsp; <span class="key">def</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">byte</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t13" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">byte</span><span class="strut">&nbsp;</span></p>
+<p id="t12" class="stm mis">    <span class="key">def</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">byte</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t13" class="stm mis">        <span class="key">return</span> <span class="nam">byte</span><span class="strut">&nbsp;</span></p>
 <p id="t14" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t15" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t16" class="stm run hide_run"><span class="key">def</span> <span class="nam">ceildiv</span><span class="op">(</span><span class="nam">dividend</span><span class="op">,</span> <span class="nam">divisor</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t17" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39; integer ceiling division &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t18" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="op">(</span><span class="nam">dividend</span> <span class="op">+</span> <span class="nam">divisor</span> <span class="op">-</span> <span class="num">1</span><span class="op">)</span> <span class="op">//</span> <span class="nam">divisor</span><span class="strut">&nbsp;</span></p>
+<p id="t17" class="pln">    <span class="str">''' integer ceiling division '''</span><span class="strut">&nbsp;</span></p>
+<p id="t18" class="stm run hide_run">    <span class="key">return</span> <span class="op">(</span><span class="nam">dividend</span> <span class="op">+</span> <span class="nam">divisor</span> <span class="op">-</span> <span class="num">1</span><span class="op">)</span> <span class="op">//</span> <span class="nam">divisor</span><span class="strut">&nbsp;</span></p>
 <p id="t19" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t20" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t21" class="stm run hide_run"><span class="key">def</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">alph_len</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t22" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t23" class="pln"><span class="str">&nbsp; &nbsp; computes the ideal conversion ratio for the given alphabet.</span><span class="strut">&nbsp;</span></p>
-<p id="t24" class="pln"><span class="str">&nbsp; &nbsp; A ratio is considered ideal when the number of bits in one output</span><span class="strut">&nbsp;</span></p>
-<p id="t25" class="pln"><span class="str">&nbsp; &nbsp; encoding chunk that don&#39;t add up to one input encoding chunk is minimal.</span><span class="strut">&nbsp;</span></p>
-<p id="t26" class="pln"><span class="str">&nbsp; &nbsp; &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t27" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">binlen</span><span class="op">,</span> <span class="nam">enclen</span> <span class="op">=</span> <span class="nam">min</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
-<p id="t28" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="op">(</span><span class="nam">i</span><span class="op">,</span> <span class="nam">i</span><span class="op">*</span><span class="num">8</span> <span class="op">/</span> <span class="nam">math</span><span class="op">.</span><span class="nam">log</span><span class="op">(</span><span class="nam">alph_len</span><span class="op">,</span> <span class="num">2</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t29" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="num">7</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t30" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="op">]</span><span class="op">,</span> <span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">k</span><span class="op">:</span> <span class="nam">k</span><span class="op">[</span><span class="num">1</span><span class="op">]</span> <span class="op">%</span> <span class="num">1</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t22" class="pln">    <span class="str">'''</span><span class="strut">&nbsp;</span></p>
+<p id="t23" class="pln"><span class="str">    computes the ideal conversion ratio for the given alphabet.</span><span class="strut">&nbsp;</span></p>
+<p id="t24" class="pln"><span class="str">    A ratio is considered ideal when the number of bits in one output</span><span class="strut">&nbsp;</span></p>
+<p id="t25" class="pln"><span class="str">    encoding chunk that don't add up to one input encoding chunk is minimal.</span><span class="strut">&nbsp;</span></p>
+<p id="t26" class="pln"><span class="str">    '''</span><span class="strut">&nbsp;</span></p>
+<p id="t27" class="stm run hide_run">    <span class="nam">binlen</span><span class="op">,</span> <span class="nam">enclen</span> <span class="op">=</span> <span class="nam">min</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
+<p id="t28" class="pln">                          <span class="op">(</span><span class="nam">i</span><span class="op">,</span> <span class="nam">i</span><span class="op">*</span><span class="num">8</span> <span class="op">/</span> <span class="nam">math</span><span class="op">.</span><span class="nam">log</span><span class="op">(</span><span class="nam">alph_len</span><span class="op">,</span> <span class="num">2</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t29" class="pln">                          <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="num">1</span><span class="op">,</span> <span class="num">7</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t30" class="pln">                         <span class="op">]</span><span class="op">,</span> <span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">k</span><span class="op">:</span> <span class="nam">k</span><span class="op">[</span><span class="num">1</span><span class="op">]</span> <span class="op">%</span> <span class="num">1</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t31" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t32" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="nam">binlen</span><span class="op">,</span> <span class="nam">int</span><span class="op">(</span><span class="nam">enclen</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t32" class="stm run hide_run">    <span class="key">return</span> <span class="nam">binlen</span><span class="op">,</span> <span class="nam">int</span><span class="op">(</span><span class="nam">enclen</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t33" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t34" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t35" class="stm run hide_run"><span class="key">def</span> <span class="nam">encode</span><span class="op">(</span><span class="nam">digest</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t36" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t37" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">nchunks</span> <span class="op">=</span> <span class="nam">ceildiv</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">digest</span><span class="op">)</span><span class="op">,</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t38" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">binstr</span> <span class="op">=</span> <span class="nam">digest</span><span class="op">.</span><span class="nam">ljust</span><span class="op">(</span><span class="nam">nchunks</span> <span class="op">*</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> <span class="str">b&#39;\0&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t36" class="stm run hide_run">    <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t37" class="stm run hide_run">    <span class="nam">nchunks</span> <span class="op">=</span> <span class="nam">ceildiv</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">digest</span><span class="op">)</span><span class="op">,</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t38" class="stm run hide_run">    <span class="nam">binstr</span> <span class="op">=</span> <span class="nam">digest</span><span class="op">.</span><span class="nam">ljust</span><span class="op">(</span><span class="nam">nchunks</span> <span class="op">*</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> <span class="str">b'\0'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t39" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t40" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="str">&#39;&#39;</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
-<p id="t41" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">_encode_chunk</span><span class="op">(</span><span class="nam">binstr</span><span class="op">,</span> <span class="nam">i</span><span class="op">)</span> <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="num">0</span><span class="op">,</span> <span class="nam">nchunks</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t42" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t40" class="stm run hide_run">    <span class="key">return</span> <span class="str">''</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
+<p id="t41" class="pln">            <span class="nam">_encode_chunk</span><span class="op">(</span><span class="nam">binstr</span><span class="op">,</span> <span class="nam">i</span><span class="op">)</span> <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="num">0</span><span class="op">,</span> <span class="nam">nchunks</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t42" class="pln">        <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t43" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t44" class="stm run hide_run"><span class="key">def</span> <span class="nam">_encode_chunk</span><span class="op">(</span><span class="nam">data</span><span class="op">,</span> <span class="nam">index</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t45" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t46" class="pln"><span class="str">&nbsp; &nbsp; gets a chunk from the input data, converts it to a number and</span><span class="strut">&nbsp;</span></p>
-<p id="t47" class="pln"><span class="str">&nbsp; &nbsp; encodes that number</span><span class="strut">&nbsp;</span></p>
-<p id="t48" class="pln"><span class="str">&nbsp; &nbsp; &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t49" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">chunk</span> <span class="op">=</span> <span class="nam">_get_chunk</span><span class="op">(</span><span class="nam">data</span><span class="op">,</span> <span class="nam">index</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t50" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="nam">_encode_long</span><span class="op">(</span><span class="nam">_chunk_to_long</span><span class="op">(</span><span class="nam">chunk</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t45" class="pln">    <span class="str">'''</span><span class="strut">&nbsp;</span></p>
+<p id="t46" class="pln"><span class="str">    gets a chunk from the input data, converts it to a number and</span><span class="strut">&nbsp;</span></p>
+<p id="t47" class="pln"><span class="str">    encodes that number</span><span class="strut">&nbsp;</span></p>
+<p id="t48" class="pln"><span class="str">    '''</span><span class="strut">&nbsp;</span></p>
+<p id="t49" class="stm run hide_run">    <span class="nam">chunk</span> <span class="op">=</span> <span class="nam">_get_chunk</span><span class="op">(</span><span class="nam">data</span><span class="op">,</span> <span class="nam">index</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t50" class="stm run hide_run">    <span class="key">return</span> <span class="nam">_encode_long</span><span class="op">(</span><span class="nam">_chunk_to_long</span><span class="op">(</span><span class="nam">chunk</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t51" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t52" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t53" class="stm run hide_run"><span class="key">def</span> <span class="nam">_encode_long</span><span class="op">(</span><span class="nam">val</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t54" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t55" class="pln"><span class="str">&nbsp; &nbsp; encodes an integer of 8*chunklen[0] bits using the specified</span><span class="strut">&nbsp;</span></p>
-<p id="t56" class="pln"><span class="str">&nbsp; &nbsp; alphabet</span><span class="strut">&nbsp;</span></p>
-<p id="t57" class="pln"><span class="str">&nbsp; &nbsp; &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t58" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t59" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="str">&#39;&#39;</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
-<p id="t60" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">ALPHABET</span><span class="op">[</span><span class="op">(</span><span class="nam">val</span><span class="op">//</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">**</span><span class="nam">i</span><span class="op">)</span> <span class="op">%</span> <span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
-<p id="t61" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">reversed</span><span class="op">(</span><span class="nam">range</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t62" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t54" class="pln">    <span class="str">'''</span><span class="strut">&nbsp;</span></p>
+<p id="t55" class="pln"><span class="str">    encodes an integer of 8*chunklen[0] bits using the specified</span><span class="strut">&nbsp;</span></p>
+<p id="t56" class="pln"><span class="str">    alphabet</span><span class="strut">&nbsp;</span></p>
+<p id="t57" class="pln"><span class="str">    '''</span><span class="strut">&nbsp;</span></p>
+<p id="t58" class="stm run hide_run">    <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t59" class="stm run hide_run">    <span class="key">return</span> <span class="str">''</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
+<p id="t60" class="pln">            <span class="nam">ALPHABET</span><span class="op">[</span><span class="op">(</span><span class="nam">val</span><span class="op">//</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">**</span><span class="nam">i</span><span class="op">)</span> <span class="op">%</span> <span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
+<p id="t61" class="pln">            <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">reversed</span><span class="op">(</span><span class="nam">range</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t62" class="pln">        <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t63" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t64" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t65" class="stm run hide_run"><span class="key">def</span> <span class="nam">_chunk_to_long</span><span class="op">(</span><span class="nam">chunk</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t66" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t67" class="pln"><span class="str">&nbsp; &nbsp; parses a chunk of bytes to integer using big-endian representation</span><span class="strut">&nbsp;</span></p>
-<p id="t68" class="pln"><span class="str">&nbsp; &nbsp; &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t69" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t70" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="nam">sum</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
-<p id="t71" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="num">256</span><span class="op">**</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">-</span><span class="num">1</span><span class="op">-</span><span class="nam">i</span><span class="op">)</span> <span class="op">*</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">chunk</span><span class="op">[</span><span class="nam">i</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t72" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t73" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t66" class="pln">    <span class="str">'''</span><span class="strut">&nbsp;</span></p>
+<p id="t67" class="pln"><span class="str">    parses a chunk of bytes to integer using big-endian representation</span><span class="strut">&nbsp;</span></p>
+<p id="t68" class="pln"><span class="str">    '''</span><span class="strut">&nbsp;</span></p>
+<p id="t69" class="stm run hide_run">    <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t70" class="stm run hide_run">    <span class="key">return</span> <span class="nam">sum</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
+<p id="t71" class="pln">            <span class="num">256</span><span class="op">**</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">-</span><span class="num">1</span><span class="op">-</span><span class="nam">i</span><span class="op">)</span> <span class="op">*</span> <span class="nam">ord_byte</span><span class="op">(</span><span class="nam">chunk</span><span class="op">[</span><span class="nam">i</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t72" class="pln">            <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t73" class="pln">        <span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t74" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t75" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t76" class="stm run hide_run"><span class="key">def</span> <span class="nam">_get_chunk</span><span class="op">(</span><span class="nam">data</span><span class="op">,</span> <span class="nam">index</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t77" class="pln">&nbsp; &nbsp; <span class="str">&#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t78" class="pln"><span class="str">&nbsp; &nbsp; partition the data into chunks and retrieve the chunk at the given index</span><span class="strut">&nbsp;</span></p>
-<p id="t79" class="pln"><span class="str">&nbsp; &nbsp; &#39;&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t80" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t81" class="stm run hide_run">&nbsp; &nbsp; <span class="key">return</span> <span class="nam">data</span><span class="op">[</span><span class="nam">index</span><span class="op">*</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">:</span><span class="op">(</span><span class="nam">index</span><span class="op">+</span><span class="num">1</span><span class="op">)</span><span class="op">*</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
-                
+<p id="t77" class="pln">    <span class="str">'''</span><span class="strut">&nbsp;</span></p>
+<p id="t78" class="pln"><span class="str">    partition the data into chunks and retrieve the chunk at the given index</span><span class="strut">&nbsp;</span></p>
+<p id="t79" class="pln"><span class="str">    '''</span><span class="strut">&nbsp;</span></p>
+<p id="t80" class="stm run hide_run">    <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t81" class="stm run hide_run">    <span class="key">return</span> <span class="nam">data</span><span class="op">[</span><span class="nam">index</span><span class="op">*</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">:</span><span class="op">(</span><span class="nam">index</span><span class="op">+</span><span class="num">1</span><span class="op">)</span><span class="op">*</span><span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
+
             </td>
         </tr>
     </table>
@@ -243,8 +243,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.2</a>,
-            created at 2015-11-15 23:07
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.1</a>,
+            created at 2016-07-03 12:31
         </p>
     </div>
 </div>
