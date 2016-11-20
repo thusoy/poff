@@ -87,7 +87,7 @@
         <table class="table">
           <tr><th>Domain</th><th>Type</th><th>Value</th><th>DynDNS</th><th>Actions</th></tr>
           {% for record in domain.records %}
-            {% if record.type != 'SOA' %}
+            {% if record.type and record.type != 'SOA' %}
               <tr>
                 <td>
                   <input type="text"
