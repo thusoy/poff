@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+
+## [1.3.1] - 2016-11-19
 ### Added
 - Ability to set the TSIG algorithm (previously everything was hmac-sha256)
 
@@ -48,7 +50,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Note
 First release.
 
-[unreleased]: https://github.com/thusoy/poff/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/thusoy/poff/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/thusoy/poff/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/thusoy/poff/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/thusoy/poff/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/thusoy/poff/compare/v1.1.1...v1.1.2
