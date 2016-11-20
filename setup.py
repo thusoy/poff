@@ -34,9 +34,10 @@ setup(
     install_requires=install_requires,
     extras_require={
         'test': [
-            'nose',
             'coverage',
+            'nose',
             'tox',
+            'twine',
             'watchdog',
         ],
         'postgres': ['psycopg2'],
