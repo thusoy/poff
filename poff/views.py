@@ -1,5 +1,6 @@
 from . import db, base62
-from .models import Domain, DomainForm, DynDNSClient, Record, RecordForm, DomainMeta
+from .models import (Domain, DomainForm, DynDNSClient, Record, RecordForm, DomainMeta, TsigKey,
+    TsigKeyForm)
 
 from flask import abort, redirect, render_template, flash, request, Blueprint
 from flask.views import MethodView
@@ -17,6 +18,7 @@ def default_context():
     domains = Domain.query.order_by(Domain.name).all()
     return {
         'domains': domains,
+        'tsigkeyform': TsigKeyForm(),
         'domainform': DomainForm(),
         'recordform': RecordForm(),
     }
@@ -153,6 +155,30 @@ def new_record(domain_id):
         _logger.debug('Record failed form validation')
         flash('Failed to validate new record, check the errors in the form below!', 'warning')
         return render_template('domains.html', recordform=form), 400
+    return redirect('/')
+
+
+@mod.route('/domains/<int:domain_id>/tsigkeys', methods=['POST'])
+def domain_tsigkeys(domain_id):
+    domain = Domain.query.get_or_404(domain_id)
+    form = TsigKeyForm()
+
+    if not form.validate_on_submit():
+        _logger.debug('TsigKey failed form validation')
+        flash('Failed to validate new DynDNS key', 'warning')
+        return render_template('domains.html', tsigkeyform=form), 400
+
+    tsigkey = TsigKey()
+    form.populate_obj(tsigkey)
+
+    domain_tsigkey = DomainMeta(domain=domain, kind='TSIG-ALLOW-DNSUPDATE',
+        content=tsigkey.name)
+
+    db.session.add(tsigkey)
+    db.session.add(domain_tsigkey)
+
+    _logger.info('Added tsigkey for for "%s"', domain.name)
+    flash('New dyndns key added successfully!', 'success')
     return redirect('/')
 
 

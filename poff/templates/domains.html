@@ -90,6 +90,19 @@
           {{ recordform.render() }}
           <input type="submit" value="New record" class="btn btn-primary">
         </form>
+
+        <h4>TSIG keys</h4>
+        {% for tsigkey in domain.tsigkeys %}
+        <label>
+          {{ tsigkey.name }}:
+          <input value="{{ tsigkey.secret }}" class="input-copyable-tsig">
+        </label>
+        {% endfor %}
+
+        <form action="{{ url_for('.domain_tsigkeys', domain_id=domain.id) }}" method="post">
+          {{ tsigkeyform.render() }}
+          <input type="submit" value="New DynDNS key" class="btn btn-primary">
+        </form>
       {% endfor %}
 
       <h3>New domain</h3>

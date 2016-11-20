@@ -1,5 +1,5 @@
 from . import DBTestCase
-from poff.models import Domain, Record, DomainMeta
+from poff.models import Domain, Record, DomainMeta, TsigKey
 
 import datetime
 import re
@@ -44,6 +44,23 @@ class DomainTest(DBTestCase):
             nsec3narrow = DomainMeta.query.filter_by(domain=domains[0], kind='NSEC3NARROW').first()
             self.assertEqual(nsec3narrow.content, '1')
 
+
+    def test_create_tsigkey(self):
+        data = {
+            'name': 'testkey',
+        }
+        response = self.client.post('/domains/%d/tsigkeys' % self.domain_id, data=data,
+            follow_redirects=True)
+        self.assert200(response)
+
+        with self.app.app_context():
+            tsigkeys = TsigKey.query.all()
+            self.assertEqual(len(tsigkeys), 1)
+
+            domain_tsigkeys = DomainMeta.query\
+                .filter_by(domain_id=self.domain_id, kind='TSIG-ALLOW-DNSUPDATE').all()
+            self.assertEqual(len(domain_tsigkeys), 1)
+            self.assertEqual(domain_tsigkeys[0].content, 'testkey')
 
 
     def test_create_invalid_domain(self):

@@ -4,6 +4,7 @@ from flask import Markup
 from flask_wtf import Form
 from wtforms.fields import HiddenField
 from wtforms_alchemy import model_form_factory
+import base64
 import datetime
 import os
 
@@ -56,6 +57,15 @@ class Domain(db.Model):
         soa_record.update_serial()
 
 
+    @property
+    def tsigkeys(self):
+        keys = TsigKey.query.join(DomainMeta, TsigKey.name == DomainMeta.content)\
+            .filter(DomainMeta.kind=='TSIG-ALLOW-DNSUPDATE')\
+            .filter(DomainMeta.domain_id==self.id)\
+            .all()
+        return keys
+
+
 class DomainMeta(db.Model):
     __tablename__ = 'domainmetadata'
     id = db.Column(db.Integer, primary_key=True)
@@ -63,6 +73,23 @@ class DomainMeta(db.Model):
     domain_id = db.Column(db.Integer, db.ForeignKey('domains.id'))
     kind = db.Column(db.String(16))
     content = db.Column(db.Text())
+
+
+class TsigKey(db.Model):
+    __tablename__ = 'tsigkeys'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    algorithm = db.Column(db.String(50))
+    secret = db.Column(db.String(255))
+
+    def __init__(self, **kwargs):
+        if not 'secret' in kwargs:
+            kwargs['secret'] = base64.b64encode(os.urandom(16))
+
+        if not 'algorithm' in kwargs:
+            kwargs['algorithm'] = 'hmac-sha256'
+
+        super(TsigKey, self).__init__(**kwargs)
 
 
 class Record(db.Model):
@@ -172,4 +199,12 @@ class RecordForm(_PrintableForm):
             'content',
             'ttl',
             'prio',
+        )
+
+
+class TsigKeyForm(_PrintableForm):
+    class Meta:
+        model = TsigKey
+        only = (
+            'name',
         )
