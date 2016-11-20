@@ -2,6 +2,7 @@ from . import DBTestCase
 from poff.models import Domain, Record, DomainMeta
 
 import datetime
+import re
 
 class DomainTest(DBTestCase):
 
@@ -35,9 +36,13 @@ class DomainTest(DBTestCase):
             soa_edit_record = DomainMeta.query.filter_by(domain=domains[0], kind='SOA-EDIT').first()
             self.assertEqual(soa_edit_record.content, 'INCEPTION-INCREMENT')
 
+            # Should add NSEC3 parameters
+            nsec3params = DomainMeta.query.filter_by(domain=domains[0], kind='NSEC3PARAMS').first()
+            self.assertTrue(re.match(r'^1 0 1 [a-f0-9]{32}$', nsec3params.content))
+
             # Should set NSEC3 to narrow mode
             nsec3narrow = DomainMeta.query.filter_by(domain=domains[0], kind='NSEC3NARROW').first()
-            self.assertEqual(nsec3narrow, '1')
+            self.assertEqual(nsec3narrow.content, '1')
 
 
 
