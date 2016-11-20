@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from logging import getLogger
 import textwrap
 
+from ._version import __version__
+
 _logger = getLogger('poff')
 
 db = SQLAlchemy()
@@ -53,6 +55,11 @@ def create_app(config_file=None):
             you should probably gently notify your sysadmin of the failure.
         ''')
 
+    @app.context_processor
+    def default_context():
+        return {
+            'version': __version__,
+        }
 
     return app
 
