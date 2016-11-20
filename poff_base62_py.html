@@ -190,7 +190,7 @@
 <p id="t35" class="stm run hide_run"><span class="key">def</span> <span class="nam">encode</span><span class="op">(</span><span class="nam">digest</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t36" class="stm run hide_run">    <span class="nam">chunklen</span> <span class="op">=</span> <span class="nam">calc_chunklen</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">ALPHABET</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t37" class="stm run hide_run">    <span class="nam">nchunks</span> <span class="op">=</span> <span class="nam">ceildiv</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">digest</span><span class="op">)</span><span class="op">,</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t38" class="stm run hide_run">    <span class="nam">binstr</span> <span class="op">=</span> <span class="nam">digest</span><span class="op">.</span><span class="nam">ljust</span><span class="op">(</span><span class="nam">nchunks</span> <span class="op">*</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> <span class="str">b'\0'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t38" class="stm run hide_run">    <span class="nam">binstr</span> <span class="op">=</span> <span class="nam">digest</span><span class="op">.</span><span class="nam">ljust</span><span class="op">(</span><span class="nam">nchunks</span> <span class="op">*</span> <span class="nam">chunklen</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">,</span> <span class="nam">b</span><span class="str">'\0'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t39" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t40" class="stm run hide_run">    <span class="key">return</span> <span class="str">''</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="strut">&nbsp;</span></p>
 <p id="t41" class="pln">            <span class="nam">_encode_chunk</span><span class="op">(</span><span class="nam">binstr</span><span class="op">,</span> <span class="nam">i</span><span class="op">)</span> <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="num">0</span><span class="op">,</span> <span class="nam">nchunks</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
@@ -243,8 +243,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.1</a>,
-            created at 2016-07-03 12:31
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.2</a>,
+            created at 2016-11-20 00:43
         </p>
     </div>
 </div>
