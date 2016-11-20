@@ -63,6 +63,41 @@ class DomainTest(DBTestCase):
             self.assertEqual(domain_tsigkeys[0].content, 'testkey')
 
 
+    def test_delete_tsigkey(self):
+        tsigkey = TsigKey(name='testkey')
+        tsigmeta = DomainMeta(domain_id=self.domain_id, kind='TSIG-ALLOW-DNSUPDATE',
+            content='testkey')
+        self.add_objects(tsigkey, tsigmeta)
+
+        response = self.client.delete('/domains/%d/tsigkeys/testkey' % self.domain_id,
+            follow_redirects=True)
+
+        self.assert200(response)
+        with self.app.app_context():
+            self.assertEqual(len(TsigKey.query.all()), 0)
+            self.assertEqual(len(DomainMeta.query.all()), 0)
+
+
+    def test_delete_tsigkey_over_post(self):
+        tsigkey = TsigKey(name='testkey')
+        tsigmeta = DomainMeta(domain_id=self.domain_id, kind='TSIG-ALLOW-DNSUPDATE',
+            content='testkey')
+        self.add_objects(tsigkey, tsigmeta)
+
+        response = self.client.post('/domains/%d/tsigkeys/testkey' % self.domain_id,
+            data={'_method': 'DELETE'}, follow_redirects=True)
+
+        self.assert200(response)
+        with self.app.app_context():
+            self.assertEqual(len(TsigKey.query.all()), 0)
+            self.assertEqual(len(DomainMeta.query.all()), 0)
+
+
+    def test_delete_nonexisting_tsigkey(self):
+        response = self.client.delete('/domains/%d/tsigkeys/foobar' % self.domain_id)
+        self.assert404(response)
+
+
     def test_create_invalid_domain(self):
         data = {
             'name': '',

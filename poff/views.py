@@ -182,6 +182,22 @@ def domain_tsigkeys(domain_id):
     return redirect('/')
 
 
+class TsigKeyView(MethodOverrideView):
+
+    def delete(self, domain_id, tsig_name):
+        domain = Domain.query.get_or_404(domain_id)
+        tsigkey = TsigKey.query.filter_by(name=tsig_name).first() or abort(404)
+        tsig_meta = DomainMeta.query.filter_by(domain_id=domain_id, kind='TSIG-ALLOW-DNSUPDATE',
+            content=tsig_name).first()
+
+        db.session.delete(tsigkey)
+        db.session.delete(tsig_meta)
+
+        _logger.info('DynDNS key %s deleted', tsigkey.name)
+        flash('DynDNS key %s deleted' % tsigkey.name, 'success')
+        return redirect('/')
+
+
 @mod.route('/records/<int:record_id>/new-dyndns-client', methods=['POST'])
 def new_dyndns_client(record_id):
     record = Record.query.get_or_404(record_id)
@@ -240,4 +256,7 @@ class DynDNSClientView(MethodOverrideView):
 
 mod.add_url_rule('/domains/<int:domain_id>', view_func=DomainView.as_view('domain_details'))
 mod.add_url_rule('/records/<int:record_id>', view_func=RecordView.as_view('record_details'))
-mod.add_url_rule('/dyndns-clients/<int:client_id>', view_func=DynDNSClientView.as_view('client_details'))
+mod.add_url_rule('/dyndns-clients/<int:client_id>',
+    view_func=DynDNSClientView.as_view('client_details'))
+mod.add_url_rule('/domains/<int:domain_id>/tsigkeys/<tsig_name>',
+    view_func=TsigKeyView.as_view('tsigkey_details'))

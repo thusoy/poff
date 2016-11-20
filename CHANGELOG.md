@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Added
+- Ability to delete DynDNS keys
 
 ## [1.3.1] - 2016-11-19
 ### Added

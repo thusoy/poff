@@ -97,6 +97,14 @@
           {{ tsigkey.name }}:
           <input value="{{ tsigkey.secret }}" class="input-copyable-tsig">
         </label> ({{ tsigkey.algorithm }})
+
+        <form action="{{ url_for('.tsigkey_details', domain_id=domain.id, tsig_name=tsigkey.name) }}"
+              method="post"
+              class="form-inline">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" name="Delete" class="btn btn-danger btn-xs" value="Delete key">
+        </form>
+
         <br>
         {% endfor %}
 
