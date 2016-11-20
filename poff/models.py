@@ -64,7 +64,7 @@ class Record(db.Model):
     type = db.Column(db.String(10), info={
         'choices': [(t, t) for t in _RECORD_TYPES],
     })
-    content = db.Column(db.String(65535), nullable=False)
+    content = db.Column(db.String(65535))
     ttl = db.Column(db.Integer, default=3600)
     prio = db.Column(db.Integer)
     change_date = db.Column(db.Integer)
