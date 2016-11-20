@@ -96,7 +96,8 @@
         <label>
           {{ tsigkey.name }}:
           <input value="{{ tsigkey.secret }}" class="input-copyable-tsig">
-        </label>
+        </label> ({{ tsigkey.algorithm }})
+        <br>
         {% endfor %}
 
         <form action="{{ url_for('.domain_tsigkeys', domain_id=domain.id) }}" method="post">

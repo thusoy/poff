@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Added
+- Ability to set the TSIG algorithm (previously everything was hmac-sha256)
 
 ## [1.3.0] - 2016-11-19
 ### Added

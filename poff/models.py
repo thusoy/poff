@@ -34,6 +34,15 @@ _RECORD_TYPES = (
     'TXT',
 )
 
+_TSIG_ALGORITHMS = (
+    'hmac-sha256',
+    'hmac-md5',
+    'hmac-sha1',
+    'hmac-sha224',
+    'hmac-sha384',
+    'hmac-sha512',
+)
+
 
 class Domain(db.Model):
     __tablename__ = 'domains'
@@ -79,15 +88,14 @@ class TsigKey(db.Model):
     __tablename__ = 'tsigkeys'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    algorithm = db.Column(db.String(50))
+    algorithm = db.Column(db.String(50), info={
+        'choices': [(t, t) for t in _TSIG_ALGORITHMS],
+    }, default='hmac-sha256')
     secret = db.Column(db.String(255))
 
     def __init__(self, **kwargs):
         if not 'secret' in kwargs:
             kwargs['secret'] = base64.b64encode(os.urandom(16))
-
-        if not 'algorithm' in kwargs:
-            kwargs['algorithm'] = 'hmac-sha256'
 
         super(TsigKey, self).__init__(**kwargs)
 
@@ -207,4 +215,5 @@ class TsigKeyForm(_PrintableForm):
         model = TsigKey
         only = (
             'name',
+            'algorithm',
         )
