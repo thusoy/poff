@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Added
+- Add TSIG keys to domains
+- Autocreates NSEC3 params for new domains
+
+### Fixed
+- View skips records without type ([#4](https://github.com/thusoy/poff/issues/4))
 
 ## [1.2.0] - 2015-11-15
 ### Added
