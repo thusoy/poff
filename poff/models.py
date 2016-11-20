@@ -1,7 +1,7 @@
 from . import db, base62
 
 from flask import Markup
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms.fields import HiddenField
 from wtforms_alchemy import model_form_factory
 import datetime
