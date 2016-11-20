@@ -39,12 +39,11 @@ def domains():
         spf_record = Record(content='v=spf1 -all', domain=domain, type='TXT',
             name=domain.name)
 
-        soa_edit_meta = DomainMeta(domain=domain, kind='SOA-EDIT', content='INCEPTION-INCREMENT')
-
         db.session.add(domain)
         db.session.add(soa_record)
         db.session.add(spf_record)
-        db.session.add(soa_edit_meta)
+        db.session.add(DomainMeta(domain=domain, kind='SOA-EDIT', content='INCEPTION-INCREMENT'))
+        db.session.add(DomainMeta(domain=domain, kind='NSEC3NARROW', content='1'))
         _logger.info('New domain saved: %s', domain.name)
         flash('New domain added successfully!', 'success')
     else:

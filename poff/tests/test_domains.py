@@ -32,8 +32,12 @@ class DomainTest(DBTestCase):
             self.assertEqual(spf_record.content, 'v=spf1 -all')
 
             # SOA-EDIT should be set
-            meta_record = DomainMeta.query.filter_by(domain=domains[0]).first()
-            self.assertEqual(meta_record.kind, 'SOA-EDIT')
+            soa_edit_record = DomainMeta.query.filter_by(domain=domains[0], kind='SOA-EDIT').first()
+            self.assertEqual(soa_edit_record.content, 'INCEPTION-INCREMENT')
+
+            # Should set NSEC3 to narrow mode
+            nsec3narrow = DomainMeta.query.filter_by(domain=domains[0], kind='NSEC3NARROW').first()
+            self.assertEqual(nsec3narrow, '1')
 
 
 
