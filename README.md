@@ -8,16 +8,12 @@ A plain old flask frontend for PowerDNS.
 Development
 -----------
 
-Set up new virtualenv:
+Set up local virtualenv with the dependencies:
 
-    $ virtualenv venv
-
-Install everything:
-
-    $ pip install -e .[test]
+    $ ./configure
 
 Run the tests:
 
-    $ nosetests
+    $ ./test
 
 Happy hacking!

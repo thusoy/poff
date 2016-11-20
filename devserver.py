@@ -1,3 +1,5 @@
+#!./venv/bin/python
+
 from poff import create_app, db
 
 from os import path

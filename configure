@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -eu
+
+main () {
+    install_virtualenv
+    install_deps
+}
+
+install_virtualenv () {
+    if [ -d venv ]; then
+        return
+    fi
+    virtualenv venv
+    ./venv/bin/pip install -U pip
+}
+
+install_deps () {
+    ./venv/bin/pip install -e .[test]
+}
+
+main
