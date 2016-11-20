@@ -11,14 +11,20 @@ _logger = getLogger('poff.views')
 
 mod = Blueprint('views', __name__)
 
-@mod.route('/')
-def main():
+
+@mod.context_processor
+def default_context():
     domains = Domain.query.order_by(Domain.name).all()
-    return render_template('domains.html', **{
+    return {
         'domains': domains,
         'domainform': DomainForm(),
         'recordform': RecordForm(),
-    })
+    }
+
+
+@mod.route('/')
+def main():
+    return render_template('domains.html')
 
 
 @mod.route('/domains', methods=['POST'])
@@ -117,9 +123,7 @@ class RecordView(MethodOverrideView):
             flash('Failed to validate record modifications', 'warning')
             context = {
                 'form_errors': form.errors,
-                'domains': Domain.query.order_by(Domain.name).all(),
                 'recordform': form,
-                'domainform': DomainForm(),
             }
             return render_template('domains.html', **context), 400
 
@@ -148,7 +152,7 @@ def new_record(domain_id):
     else:
         _logger.debug('Record failed form validation')
         flash('Failed to validate new record, check the errors in the form below!', 'warning')
-        return render_template('domains.html', recordform=form, domainform=DomainForm()), 400
+        return render_template('domains.html', recordform=form), 400
     return redirect('/')
 
 
