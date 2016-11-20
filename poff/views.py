@@ -14,7 +14,7 @@ mod = Blueprint('views', __name__)
 @mod.route('/')
 def main():
     domains = Domain.query.order_by(Domain.name).all()
-    return render_template('base.html', **{
+    return render_template('domains.html', **{
         'domains': domains,
         'domainform': DomainForm(),
         'recordform': RecordForm(),
@@ -52,7 +52,7 @@ def domains():
     else:
         flash('Failed to validate new domain, check the errors in the form below', 'error')
         _logger.debug('New domain failed form validation.')
-        return render_template('base.html', domainform=form), 400
+        return render_template('domains.html', domainform=form), 400
     return redirect('/')
 
 
@@ -121,7 +121,7 @@ class RecordView(MethodOverrideView):
                 'recordform': form,
                 'domainform': DomainForm(),
             }
-            return render_template('base.html', **context), 400
+            return render_template('domains.html', **context), 400
 
 
     def delete(self, record_id):
@@ -148,7 +148,7 @@ def new_record(domain_id):
     else:
         _logger.debug('Record failed form validation')
         flash('Failed to validate new record, check the errors in the form below!', 'warning')
-        return render_template('base.html', recordform=form, domainform=DomainForm()), 400
+        return render_template('domains.html', recordform=form, domainform=DomainForm()), 400
     return redirect('/')
 
 
