@@ -1,5 +1,5 @@
 from . import db, base62
-from .models import Domain, DomainForm, DynDNSClient, Record, RecordForm
+from .models import Domain, DomainForm, DynDNSClient, Record, RecordForm, DomainMeta
 
 from flask import abort, redirect, render_template, flash, request, Blueprint
 from flask.views import MethodView
@@ -39,9 +39,12 @@ def domains():
         spf_record = Record(content='v=spf1 -all', domain=domain, type='TXT',
             name=domain.name)
 
+        soa_edit_meta = DomainMeta(domain=domain, kind='SOA-EDIT', content='INCEPTION-INCREMENT')
+
         db.session.add(domain)
         db.session.add(soa_record)
         db.session.add(spf_record)
+        db.session.add(soa_edit_meta)
         _logger.info('New domain saved: %s', domain.name)
         flash('New domain added successfully!', 'success')
     else:

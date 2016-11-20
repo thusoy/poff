@@ -56,6 +56,15 @@ class Domain(db.Model):
         soa_record.update_serial()
 
 
+class DomainMeta(db.Model):
+    __tablename__ = 'domainmetadata'
+    id = db.Column(db.Integer, primary_key=True)
+    domain = db.relationship('Domain', backref=db.backref('_metadata', lazy='dynamic', cascade='delete'))
+    domain_id = db.Column(db.Integer, db.ForeignKey('domains.id'))
+    kind = db.Column(db.String(16))
+    content = db.Column(db.Text())
+
+
 class Record(db.Model):
     __tablename__ = 'records'
     id = db.Column(db.Integer, primary_key=True)

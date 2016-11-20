@@ -1,5 +1,5 @@
 from . import DBTestCase
-from poff.models import Domain, Record
+from poff.models import Domain, Record, DomainMeta
 
 import datetime
 
@@ -18,8 +18,8 @@ class DomainTest(DBTestCase):
         response = self.client.post('/domains', data=data, follow_redirects=True)
         self.assert200(response)
         with self.app.app_context():
-            domains = Domain.query.all()
-            self.assertEqual(len(domains), 2)
+            domains = Domain.query.filter(Domain.id != self.domain_id).all()
+            self.assertEqual(len(domains), 1)
 
             # SOA record should have been created
             soa_record = Record.query.filter(Record.type=='SOA', Record.name=='test.com').one()
@@ -30,6 +30,11 @@ class DomainTest(DBTestCase):
             spf_record = Record.query.filter(Record.type=='TXT',
                 Record.name=='test.com').one()
             self.assertEqual(spf_record.content, 'v=spf1 -all')
+
+            # SOA-EDIT should be set
+            meta_record = DomainMeta.query.filter_by(domain=domains[0]).first()
+            self.assertEqual(meta_record.kind, 'SOA-EDIT')
+
 
 
     def test_create_invalid_domain(self):
