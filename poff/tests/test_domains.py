@@ -128,3 +128,21 @@ class DomainTest(DBTestCase):
         soa_record.update_serial()
         today = datetime.datetime.now()
         self.assertEqual(soa_record.serial, today.strftime('%Y%m%d00'))
+
+
+    def test_enable_dnssec(self):
+        '''
+        sample record:
+
+         id | domain_id | flags | active |                         content
+        ----+-----------+-------+--------+----------------------------------------------------------
+          5 |         5 |   256 | t      | Private-key-format: v1.2                                +
+            |           |       |        | Algorithm: 13 (ECDSAP256SHA256)                         +
+            |           |       |        | PrivateKey: HQyEW0IMXYAr89Mq8DmsXN8LfNwgNwPYzmOLkc/xJL8=+
+            |           |       |        |
+        (1 row)
+        '''
+        # TODO: Figure out where the flags are specified. We can restrict
+        # ourselves to only creating EC keys for simplicity.
+        # Should also provide an interface for getting the DS records
+        pass
