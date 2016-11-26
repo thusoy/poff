@@ -147,6 +147,11 @@ def new_record(domain_id):
         record = Record()
         record.domain = domain
         form.populate_obj(record)
+
+        # Ensure MX records always has a prio
+        if record.type == 'MX':
+            record.prio = record.prio or 0
+
         domain.update_soa()
         db.session.add(record)
         _logger.info('New record saved: %s', record.name)

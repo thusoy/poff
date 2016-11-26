@@ -27,6 +27,21 @@ class RecordTest(DBTestCase):
             self.assertNotEqual(Record.query.get(self.soa_id).serial, '2014010100')
 
 
+    def test_create_mx_record_default_prio(self):
+        data = {
+            'name': 'mx.test.com',
+            'type': 'MX',
+            'content': '127.0.0.1',
+        }
+        response = self.client.post('/domains/%d/new_record' % self.domain_id, data=data,
+            follow_redirects=True)
+        self.assert200(response)
+        with self.app.app_context():
+            records = Record.query.filter_by(type='MX').all()
+            self.assertEqual(len(records), 1)
+            self.assertEqual(records[0].prio, 0)
+
+
     def test_invalid_create_record(self):
         data = {
             'name': 'ftp.test.com',
