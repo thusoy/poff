@@ -2,7 +2,9 @@ from . import db, base62
 
 from flask import Markup
 from flask_wtf import Form
-from wtforms.fields import HiddenField
+from sqlalchemy.ext.hybrid import hybrid_property
+from wtforms.fields import HiddenField, TextField
+from wtforms.validators import Regexp, Optional
 from wtforms_alchemy import model_form_factory
 import base64
 import datetime
@@ -60,10 +62,14 @@ class Domain(db.Model):
         return sorted(self._records, key=lambda r: '.'.join(reversed(r.name.split('.'))))
 
 
+    @property
+    def soa_record(self):
+        return Record.query.filter(Record.type=='SOA', Record.domain_id==self.id).one()
+
+
     def update_soa(self):
         """ Update the serial number of the SOA associated with this domain. """
-        soa_record = Record.query.filter(Record.type=='SOA', Record.name==self.name).one()
-        soa_record.update_serial()
+        self.soa_record.update_serial()
 
 
     @property
@@ -73,6 +79,39 @@ class Domain(db.Model):
             .filter(DomainMeta.domain_id==self.id)\
             .all()
         return keys
+
+
+    @hybrid_property
+    def mname(self):
+        return self.soa_record.content.split(' ')[0]
+
+
+    @mname.setter
+    def set_mname(self, value):
+        soa_record = self.soa_record
+        parts = soa_record.content.split(' ')
+        parts[0] = value
+        soa_record.content = ' '.join(parts)
+
+
+    @hybrid_property
+    def rname(self):
+        return self.soa_record.content.split(' ')[1].replace('.', '@', 1)
+
+
+    @rname.setter
+    def set_rname(self, value):
+        soa_record = self.soa_record
+        parts = soa_record.content.split(' ')
+        label, domain = value.split('@', 1)
+        label = label.replace('.', '\.')
+        parts[1] = '%s.%s' % (label, domain)
+        soa_record.content = ' '.join(parts)
+
+
+    @property
+    def form(self):
+        return DomainForm(obj=self)
 
 
 class DomainMeta(db.Model):
@@ -196,6 +235,16 @@ class DomainForm(_PrintableForm):
         only = (
             'name',
         )
+
+    mname = TextField(label='Master nameserver', validators=(
+        Optional(),
+        Regexp(r'^[\w\.]+$'),
+    ))
+    rname = TextField(label='Contact email', validators=(
+        Optional(),
+        # Simple email subset that also allows pre-formatted domain records
+        Regexp(r'^[\w_.+-]+(@|\.)[\w._-]+'),
+    ))
 
 
 class RecordForm(_PrintableForm):

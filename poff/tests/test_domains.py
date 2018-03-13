@@ -8,8 +8,9 @@ class DomainTest(DBTestCase):
 
     def set_up(self):
         domain = Domain(name='example.com')
+        soa_record = Record(name='example.com', type='SOA', content='example.com hostmaster.example.com 1970010101', domain=domain)
         record = Record(name='www.example.com', type='A', content='127.0.0.1', domain=domain)
-        self.domain_id, _ = self.add_objects(domain, record)
+        self.domain_id, _, _ = self.add_objects(domain, record, soa_record)
 
 
     def test_create_domain(self):
@@ -43,6 +44,78 @@ class DomainTest(DBTestCase):
             # Should set NSEC3 to narrow mode
             nsec3narrow = DomainMeta.query.filter_by(domain=domains[0], kind='NSEC3NARROW').first()
             self.assertEqual(nsec3narrow.content, '1')
+
+
+    def test_mname_validation(self):
+        invalid_mnames = (
+            'with spaces.example.com',
+        )
+        for invalid_mname in invalid_mnames:
+            self.assert400(self.client.post('/domains', data={
+                'name': 'example.com',
+                'mname': invalid_mname,
+            }))
+
+        valid_mnames = (
+            'example.com',
+            'ns.example.com',
+            'otherdomain.tld',
+        )
+        for valid_mname in valid_mnames:
+            self.assert200(self.client.post('/domains', data={
+                'name': 'example.com',
+                'mname': valid_mname,
+            }, follow_redirects=True))
+
+
+    def test_rname_validation(self):
+        invalid_rnames = (
+            'with spaces@example.com',
+            'notld',
+        )
+        for invalid_rname in invalid_rnames:
+            self.assert400(self.client.post('/domains', data={
+                'name': 'example.com',
+                'rname': invalid_rname,
+            }))
+
+        valid_rnames = (
+            'me@exammple.com',
+            'me.example.com',
+            'some.gal123@gmail.co.uk',
+        )
+        for valid_rname in valid_rnames:
+            self.assert200(self.client.post('/domains', data={
+                'name': 'example.com',
+                'rname': valid_rname,
+            }, follow_redirects=True))
+
+
+    def test_modify_mname(self):
+        response = self.client.post('/domains/%d' % self.domain_id, data={
+            'mname': 'ns.example.com',
+            'rname': 'john.doe@example.com',
+        }, follow_redirects=True)
+        self.assert200(response)
+
+        with self.app.app_context():
+            soa_record = Record.query.filter(Record.type=='SOA').one()
+            mname, rname, serial = soa_record.content.split(' ')[:3]
+            self.assertEqual(mname, 'ns.example.com')
+            self.assertEqual(rname, 'john\.doe.example.com')
+            self.assertNotEqual(serial, '1970010101')
+
+
+    def test_modify_mname_invalid(self):
+        self.assert400(self.client.post('/domains/%d' % self.domain_id, data={
+            'mname': 'ns with spaces.com',
+        }))
+
+
+    def test_modify_rname_invalid(self):
+        self.assert400(self.client.post('/domains/%d' % self.domain_id, data={
+            'rname': 'with spaces@gmail.com',
+        }))
 
 
     def test_create_tsigkey(self):
