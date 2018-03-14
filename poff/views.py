@@ -113,6 +113,7 @@ class DomainView(MethodOverrideView):
         del form['name']
 
         if not form.validate_on_submit():
+            _logger.info('Failed to validate domain form')
             abort(400)
 
         form.populate_obj(domain)
