@@ -34,10 +34,15 @@ def domains():
     form = DomainForm()
     if form.validate_on_submit():
         domain = Domain()
+        mname = form.mname.data or form.name.data
+        rname = form.rname.data or 'hostmaster.' + form.name.data
+        del form['mname']
+        del form['rname']
         form.populate_obj(domain)
 
-        soa_record = Record(content='%(domain)s hostmaster.%(domain)s 1970010100' % {
-            'domain': domain.name,
+        soa_record = Record(content='%(mname)s %(rname)s 1970010100' % {
+                'mname': mname,
+                'rname': rname,
             },
             domain=domain,
             type='SOA',
@@ -99,6 +104,21 @@ class MethodOverrideView(MethodView):
 
 
 class DomainView(MethodOverrideView):
+
+    def post(self, domain_id):
+        domain = Domain.query.get_or_404(domain_id)
+        form = DomainForm()
+
+        # This isn't modifiable, and we're re-using the form because we're lazy
+        del form['name']
+
+        if not form.validate_on_submit():
+            abort(400)
+
+        form.populate_obj(domain)
+        domain.update_soa()
+        return redirect('/')
+
 
     def delete(self, domain_id):
         domain = Domain.query.get_or_404(domain_id)

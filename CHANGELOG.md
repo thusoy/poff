@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+### Added
+- Ability to modify the SOA's main nameserver and contact (MNAME and RNAME, respectively).
+
 ## [1.3.3] - 2016-11-26
 ### Fixed
 - MX records now get a default prio=0 if not set

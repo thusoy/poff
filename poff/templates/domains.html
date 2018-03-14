@@ -18,6 +18,14 @@
           </form>
         </h2>
 
+        <form method="post"
+              action="{{ url_for('.domain_details', domain_id=domain.id) }}">
+              {{ domain.form.mname.label }}{{ domain.form.mname }}<br>
+              {{ domain.form.rname.label }}{{ domain.form.rname }}<br>
+
+              <input type="submit" value="Update" class="btn btn-primary btn-xs">
+        </form>
+
         <table class="table">
           <tr><th>Domain</th><th>Type</th><th>Value</th><th>DynDNS</th><th>Actions</th></tr>
           {% for record in domain.records %}
