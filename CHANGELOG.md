@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Fixed
+- Rejected domain edits due to missing CSRF token.
 
 ## [1.4.0] - 2018-03-13
 

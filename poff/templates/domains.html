@@ -20,6 +20,7 @@
 
         <form method="post"
               action="{{ url_for('.domain_details', domain_id=domain.id) }}">
+              {{ domain.form.csrf_token }}
               {{ domain.form.mname.label }}{{ domain.form.mname }}<br>
               {{ domain.form.rname.label }}{{ domain.form.rname }}<br>
 
