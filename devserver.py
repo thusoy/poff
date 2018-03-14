@@ -1,9 +1,12 @@
 #!./venv/bin/python
 
-from poff import create_app, db
-
+import logging
 from os import path
 
+from poff import create_app, db
+
+log_format = '%(asctime)s %(levelname)-10s %(name)s %(message)s'
+logging.basicConfig(format=log_format, level=logging.DEBUG)
 
 dev_config = path.abspath(path.join(path.dirname(__file__), 'dev_config.py'))
 
