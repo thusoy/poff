@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+
+## [1.5.0] - 2019-01-17
 ### Fixed
 - Deletion of TSIGKEYs failing with HTTP 405.
 
@@ -75,7 +77,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Note
 First release.
 
-[unreleased]: https://github.com/thusoy/poff/compare/v1.4.1...HEAD
+[unreleased]: https://github.com/thusoy/poff/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/thusoy/poff/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/thusoy/poff/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/thusoy/poff/compare/v1.3.3...v1.4.0
 [1.3.3]: https://github.com/thusoy/poff/compare/v1.3.2...v1.3.3
