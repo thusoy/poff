@@ -15,9 +15,6 @@ install_requires = [
     'wtforms-alchemy',
 ]
 
-if sys.version_info < (2, 7, 0):
-    install_requires.append('argparse')
-
 version_file = os.path.join(os.path.dirname(__file__), 'poff', '_version.py')
 with open(version_file) as fh:
     version_file_contents = fh.read().strip()

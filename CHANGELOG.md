@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Support for new RR types from pdns 4.0: CAA, ALIAS, CDNSKEY and CDS.
 
+### Removed
+- Support for python 2.6.
+
 ## [1.4.1] - 2018-03-13
 ### Fixed
 - Rejected domain edits due to missing CSRF token.
