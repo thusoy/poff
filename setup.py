@@ -28,7 +28,7 @@ setup(
     name='poff',
     version=version,
     author='Tarjei Husøy',
-    author_email='tarjei@roms.no',
+    author_email='git@thusoy.com',
     url='https://github.com/thusoy/poff',
     description="A quite small pdns frontend",
     packages=find_packages(),
