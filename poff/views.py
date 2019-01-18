@@ -5,7 +5,7 @@ from .models import (Domain, DomainForm, DynDNSClient, Record, RecordForm, Domai
 from flask import abort, redirect, render_template, flash, request, Blueprint
 from flask.views import MethodView
 from logging import getLogger
-from hmac import compare_digest
+from itsdangerous.signer import constant_time_compare
 import os
 
 _logger = getLogger('poff.views')
@@ -252,7 +252,7 @@ def update_record():
         abort(404)
     submitted_key = str(request.form.get('key', ''))
     record_key = base62.encode(record.dyndns_client.key)
-    if compare_digest(submitted_key, record_key):
+    if constant_time_compare(submitted_key, record_key):
         origin_ip = request.access_route[0]
         if origin_ip.startswith('::ffff:'):
             origin_ip = origin_ip[len('::ffff:'):]
