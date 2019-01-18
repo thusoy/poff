@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
+### Fixed
+- Deletion of TSIGKEYs failing with HTTP 405.
+
+### Added
+- Support for new RR types from pdns 4.0: CAA, ALIAS, CDNSKEY and CDS.
 
 ## [1.4.1] - 2018-03-13
 ### Fixed
