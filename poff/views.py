@@ -283,6 +283,6 @@ class DynDNSClientView(MethodOverrideView):
 mod.add_url_rule('/domains/<int:domain_id>', view_func=DomainView.as_view('domain_details'))
 mod.add_url_rule('/records/<int:record_id>', view_func=RecordView.as_view('record_details'))
 mod.add_url_rule('/dyndns-clients/<int:client_id>',
-    view_func=DynDNSClientView.as_view('client_details'))
+    view_func=DynDNSClientView.as_view('client_details'), methods=['POST', 'DELETE'])
 mod.add_url_rule('/domains/<int:domain_id>/tsigkeys/<tsig_name>',
-    view_func=TsigKeyView.as_view('tsigkey_details'))
+    view_func=TsigKeyView.as_view('tsigkey_details'), methods=['POST', 'DELETE'])
