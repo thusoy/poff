@@ -9,6 +9,7 @@ import sys
 install_requires = [
     'flask',
     'flask-sqlalchemy',
+    'sqlalchemy < 1.2',
     'flask-wtf',
     'pyyaml',
     'wtforms-alchemy',
