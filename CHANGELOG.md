@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+## Fixed
+- Fix compatibility issues with itsdangerous and wtforms.
+
 ## [1.6.1] - 2023-10-27
 
 ### Fixed
