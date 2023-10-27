@@ -94,7 +94,7 @@ def init(args):
 def _init_logging(args):
     if args.log_config:
         with open(args.log_config) as log_config_fh:
-            logging_config = yaml.load(log_config_fh)
+            logging_config = yaml.safe_load(log_config_fh)
             logging.config.dictConfig(logging_config)
     else:
         log_format = '%(asctime)s %(levelname)-10s %(name)s %(message)s'

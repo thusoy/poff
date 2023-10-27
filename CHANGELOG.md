@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+### Fixed
+- Fix compatibility with newer pyyaml.
+
 ## [1.6.0] - 2023-10-27
 
 ### Removed
