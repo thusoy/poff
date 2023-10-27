@@ -58,7 +58,7 @@ def domains():
         db.session.add(spf_record)
         db.session.add(DomainMeta(domain=domain, kind='SOA-EDIT', content='INCEPTION-INCREMENT'))
         db.session.add(DomainMeta(domain=domain, kind='NSEC3NARROW', content='1'))
-        nsec3params = '1 0 1 %s' % os.urandom(16).encode('hex')
+        nsec3params = '1 0 1 %s' % os.urandom(16).hex()
         db.session.add(DomainMeta(domain=domain, kind='NSEC3PARAMS', content=nsec3params))
         _logger.info('New domain saved: %s', domain.name)
         flash('New domain added successfully!', 'success')

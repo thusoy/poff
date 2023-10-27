@@ -11,7 +11,7 @@ install_virtualenv () {
     if [ -d venv ]; then
         return
     fi
-    virtualenv venv
+    python3 -m venv venv
     ./venv/bin/pip install -U pip
 }
 

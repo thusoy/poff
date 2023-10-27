@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+### Removed
+- Support for python 2.7.
+
 ## [1.5.0] - 2019-01-17
 ### Fixed
 - Deletion of TSIGKEYs failing with HTTP 405.
