@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+## Fixed
+- Fix compatibility with newer flask.
+
 ## [1.6.2] - 2023-10-27
 
 ## Fixed
