@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+## [1.6.2] - 2023-10-27
+
 ## Fixed
 - Fix compatibility issues with itsdangerous and wtforms.
 
@@ -90,7 +92,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Note
 First release.
 
-[unreleased]: https://github.com/thusoy/poff/compare/v1.6.1...HEAD
+[unreleased]: https://github.com/thusoy/poff/compare/v1.6.2...HEAD
+[1.6.2]: https://github.com/thusoy/poff/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/thusoy/poff/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/thusoy/poff/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/thusoy/poff/compare/v1.4.1...v1.5.0
