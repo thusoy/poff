@@ -154,7 +154,6 @@ class Record(db.Model):
     content = db.Column(db.String(65535))
     ttl = db.Column(db.Integer, default=3600)
     prio = db.Column(db.Integer)
-    change_date = db.Column(db.Integer)
     disabled = db.Column(db.Boolean, default=False)
     domain = db.relationship('Domain', backref=db.backref('_records', lazy='dynamic', cascade='all,delete'))
 

@@ -5,14 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+### Fixed
+- Compatibility with the schema used by newer pdns servers.
+
 ## [1.6.3] - 2023-10-27
 
-## Fixed
+### Fixed
 - Fix compatibility with newer flask.
 
 ## [1.6.2] - 2023-10-27
 
-## Fixed
+### Fixed
 - Fix compatibility issues with itsdangerous and wtforms.
 
 ## [1.6.1] - 2023-10-27
